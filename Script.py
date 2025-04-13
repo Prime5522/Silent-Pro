@@ -311,8 +311,22 @@ Nᴀᴍᴇ : {}
 
 Mᴇꜱꜱᴀɢᴇ : <b>{}</b>"""
     
-    CAPTION = """<b><a href="https://t.me/SilentXBotz">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a https://t.me/SilentXBotz>[SilentXBotz]</a></b>"""
+   # CAPTION = """<b><a href="https://t.me/SilentXBotz">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a https://t.me/SilentXBotz>[SilentXBotz]</a></b>"""
 
+    CAPTION = """<b>╔════❰ ꜰɪʟᴇ ɪɴꜰᴏ ❱═❍⊱❁۪۪</b>
+<b>║📂 File Name:</b> <a href='https://t.me/PrimeCineZone'>{file_name}</a>
+<b>╚═════════════════════════❍⊱❁۪۪</b>
+
+<b>╔════❰ ᴏꜰꜰɪᴄɪᴀʟ ʟɪɴᴋꜱ ❱═❍⊱❁۪۪</b>
+<b>║┣⪼ 📌 Request Group:</b> <a href='https://t.me/PrimeCineZone/143'>Click Here to Join ✨</a>
+<b>║┣⪼ 🎬 Movies Channel:</b> <a href='https://t.me/PrimeCineZone/153'>Click to Join ♨️</a>
+<b>╚═════════════════════════❍⊱❁۪۪</b>
+
+<b>╔════❰ ⚡ Powered By ❱═❍⊱❁۪۪</b>
+<b>║⪼</b> <a href='https://t.me/Prime_Botz'>Prime Botz</a>
+<b>╚═════════════════════════❍⊱❁۪۪</b>
+"""
+    
     IMDB_TEMPLATE_TXT = """
 <b>🏷 Title</b>: <a href={url}>{title}</a>
 🎭 Genres: {genres}
