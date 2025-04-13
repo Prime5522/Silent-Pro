@@ -313,18 +313,14 @@ Mᴇꜱꜱᴀɢᴇ : <b>{}</b>"""
     
    # CAPTION = """<b><a href="https://t.me/SilentXBotz">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a https://t.me/SilentXBotz>[SilentXBotz]</a></b>"""
 
-    CAPTION = """<b>╔════❰ ꜰɪʟᴇ ɪɴꜰᴏ ❱═❍⊱❁۪۪</b>
-<b>║📂 File Name:</b> <a href='https://t.me/PrimeCineZone'>{file_name}</a>
-<b>╚═════════════════════════❍⊱❁۪۪</b>
+    CAPTION = """📂 <b>ғɪʟᴇ ɴᴀᴍᴇ :</b> <a href='https://t.me/PrimeCineZone'>{file_name}</a>
 
-<b>╔════❰ ᴏꜰꜰɪᴄɪᴀʟ ʟɪɴᴋꜱ ❱═❍⊱❁۪۪</b>
-<b>║┣⪼ 📌 Request Group:</b> <a href='https://t.me/PrimeCineZone/143'>Click Here to Join ✨</a>
-<b>║┣⪼ 🎬 Movies Channel:</b> <a href='https://t.me/PrimeCineZone/153'>Click to Join ♨️</a>
-<b>╚═════════════════════════❍⊱❁۪۪</b>
+╭───────•◈•───────╮
+📌 <b>ʀᴇǫᴜᴇꜱᴛ ɢʀᴏᴜᴘ :</b> <a href='https://t.me/PrimeCineZone/143'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴊᴏɪɴ ✨</a>
+🎬 <b>ᴍᴏᴠɪᴇꜱ ᴄʜᴀɴɴᴇʟ :</b> <a href='https://t.me/PrimeCineZone/153'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ꜰᴏʀ ʟᴀᴛᴇꜱᴛ ʀᴇʟᴇᴀꜱᴇꜱ ♨️</a>
+╰───────•◈•───────╯
 
-<b>╔════❰ ⚡ Powered By ❱═❍⊱❁۪۪</b>
-<b>║⪼</b> <a href='https://t.me/Prime_Botz'>Prime Botz</a>
-<b>╚═════════════════════════❍⊱❁۪۪</b>
+<b>⚡ ᴘᴏᴡᴇʀᴇᴅ ʙʏ :</b> <a href='https://t.me/Prime_Botz'>ᴘʀɪᴍᴇ ʙᴏᴛᴢ</a>
 """
     
     IMDB_TEMPLATE_TXT = """
