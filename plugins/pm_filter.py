@@ -1275,7 +1275,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     InlineKeyboardButton('• ʜᴇʟᴘ •', callback_data='features'),
                     InlineKeyboardButton('• ᴀʙᴏᴜᴛ ʙᴏᴛᴢ •', callback_data='botz_about')
                 ],[
-                    InlineKeyboardButton('✧ ᴄʀᴇᴀᴛᴏʀ ✧', url="https://t.me/Prime_Nayem")
+                    InlineKeyboardButton('✧ ᴄʀᴇᴀᴛᴏʀ ✧', url=OWNER_LNK)
                 ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await client.edit_message_media(
@@ -1293,12 +1293,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "botz_about":
         try:
             btn = [[
-                InlineKeyboardButton("• ʀᴇQᴜᴇsᴛ ɢʀᴏᴜᴘ •", url="https://t.me/+OG3sftDEbZ9kMzFl"),
-                InlineKeyboardButton("• Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ •", url="https://t.me/Prime_Botz_Support")
+                InlineKeyboardButton("• ʀᴇQᴜᴇsᴛ ɢʀᴏᴜᴘ •", url=GRP_LNK),
+                InlineKeyboardButton("• Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ •", url=OWNER_SUPP)
             ],[
-                InlineKeyboardButton("• ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ •", url="https://t.me/Prime_Botz_Support")
+                InlineKeyboardButton("• ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ •", url=UPDATE_CHANNEL_LNK)
             ],[
-                InlineKeyboardButton("• Mᴏᴠɪᴇs Cʜᴀɴɴᴇʟ •", url="https://t.me/PrimeCineZone"),
+                InlineKeyboardButton("• Mᴏᴠɪᴇs Cʜᴀɴɴᴇʟ •", url=CHNL_LNK),
                 InlineKeyboardButton("• ᴀʙᴏᴜᴛ •", callback_data="bot")
             ],[
                 InlineKeyboardButton("⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋", callback_data="start")
