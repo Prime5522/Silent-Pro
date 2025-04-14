@@ -1303,10 +1303,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton("⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋", callback_data="start")
         ]]
         reply_markup = InlineKeyboardMarkup(btn)
-        await query.message.edit_text(
-            text="ʜᴇʀᴇ ɪꜱ ᴀʙᴏᴜᴛ ᴛʜᴇ ʙᴏᴛ ᴀɴᴅ ɪᴛꜱ ꜰᴇᴀᴛᴜʀᴇꜱ...",
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
+
+        await client.edit_message_media(
+            chat_id=query.message.chat.id,
+            message_id=query.message.id,
+            media=InputMediaPhoto(
+                media="https://i.ibb.co/DDKfvJCX/photo-2025-04-14-08-24-42-7493081901167542280.jpg",
+                caption="ʜᴇʀᴇ ɪꜱ ᴀʙᴏᴜᴛ ᴛʜᴇ ʙᴏᴛ ᴀɴᴅ ɪᴛꜱ ꜰᴇᴀᴛᴜʀᴇꜱ...",
+                parse_mode=enums.ParseMode.HTML
+            ),
+            reply_markup=reply_markup
         )
     except Exception as e:
         print(e)
