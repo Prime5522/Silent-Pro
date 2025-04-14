@@ -141,7 +141,7 @@ async def plan(client, message):
     ],[            
             InlineKeyboardButton('🚫 ᴄʟᴏꜱᴇ 🚫', callback_data='close_data')
     ]]
-    msg = await message.reply_photo(photo="https://graph.org/file/86da2027469565b5873d6.jpg", caption=script.BPREMIUM_TXT, reply_markup=InlineKeyboardMarkup(btn))
+    msg = await message.reply_photo(photo="https://i.ibb.co/kssv1RSC/photo-2025-04-07-15-18-24-7493002345488318480.jpg", caption=script.BPREMIUM_TXT, reply_markup=InlineKeyboardMarkup(btn))
     await client.send_message(PREMIUM_LOGS, log_message)
     await asyncio.sleep(300)
     await msg.delete()
