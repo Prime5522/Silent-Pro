@@ -26,7 +26,7 @@ PICS = (environ.get('PICS', 'https://i.ibb.co/yFVbMwxh/photo-2025-03-07-23-34-35
 NOR_IMG = environ.get("NOR_IMG", "https://graph.org/file/62efbcc4e7580b76530ba.jpg")
 MELCOW_VID = environ.get("MELCOW_VID", "https://graph.org/file/e215d12bfd4fa2155e90e.mp4")
 SPELL_IMG = environ.get("SPELL_IMG", "https://graph.org/file/13702ae26fb05df52667c.jpg")
-SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://telegra.ph/file/f983d857f3ce40795e4b8.jpg'))
+SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://i.ibb.co/kssv1RSC/photo-2025-04-07-15-18-24-7493002345488318480.jpg'))
 FSUB_IMG = (environ.get('FSUB_IMG', 'https://i.ibb.co/cShkPjcZ/x.jpg')).split() 
 
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5926160191').split()]  #Admin Id
@@ -56,8 +56,8 @@ OWNER_BOTZ = environ.get('OWNER_BOTZ', 'https://t.me/Prime_Admin_Support_ProBot'
 OWNER_SUPP = environ.get('OWNER_SUPP', 'https://t.me/Prime_Botz_Support')
 
 #Force Subscription Channel (Put Same Channel Id In Both Veriables)
-AUTH_CHANNEL = int(environ.get('AUTH_CHANNEL', '-1002082665507')) 
-AUTH_REQ_CHANNEL = int(environ.get('AUTH_REQ_CHANNEL', '-1002082665507'))
+AUTH_CHANNEL = int(environ.get('AUTH_CHANNEL', '-1002245813234')) 
+AUTH_REQ_CHANNEL = int(environ.get('AUTH_REQ_CHANNEL', '-1002245813234'))
 
 IS_VERIFY = is_enabled('IS_VERIFY', True)
 LOG_VR_CHANNEL = int(environ.get('LOG_VR_CHANNEL', '-1002184630716')) #Verification Channel Id 
@@ -69,8 +69,8 @@ TUTORIAL_2 = environ.get("TUTORIAL_2", "https://t.me/Prime_Movie_Watch_Dawnload/
 TUTORIAL_3 = environ.get("TUTORIAL_3", "https://t.me/Prime_Movie_Watch_Dawnload/75")
 
 # Verification (Must Fill All Veriables. Else You Got Error
-SHORTENER_API = environ.get("SHORTENER_API", "99b8fbf7c183af5fbc81b798a6f627400aa6d843")
-SHORTENER_WEBSITE = environ.get("SHORTENER_WEBSITE", "teraboxlinks.com")
+SHORTENER_API = environ.get("SHORTENER_API", "608fbfe60758ecdfcaf5a30f3a076ab2416a3031")
+SHORTENER_WEBSITE = environ.get("SHORTENER_WEBSITE", "droplink.co")
 
 SHORTENER_API2 = environ.get("SHORTENER_API2", "608fbfe60758ecdfcaf5a30f3a076ab2416a3031")
 SHORTENER_WEBSITE2 = environ.get("SHORTENER_WEBSITE2", "droplink.co")
@@ -94,7 +94,7 @@ P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "False")), False)
 IMDB = is_enabled((environ.get('IMDB', "False")), False)
 AUTO_FFILTER = is_enabled((environ.get('AUTO_FFILTER', "True")), True)
 AUTO_DELETE = is_enabled((environ.get('AUTO_DELETE', "True")), True)
-DELETE_TIME = int(environ.get("DELETE_TIME", "300"))  
+DELETE_TIME = int(environ.get("DELETE_TIME", "900"))  
 SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "False")), False)
 CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", f"{script.CAPTION}")
 BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", CUSTOM_FILE_CAPTION)
