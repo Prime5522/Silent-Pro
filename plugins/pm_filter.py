@@ -1289,34 +1289,35 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode=enums.ParseMode.HTML
         )
 
+    
     elif query.data == "botz_about":
-    try:
-        btn = [[
-            InlineKeyboardButton("• ʀᴇQᴜᴇsᴛ ɢʀᴏᴜᴘ •", url="https://t.me/+OG3sftDEbZ9kMzFl"),
-            InlineKeyboardButton("• Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ •", url="https://t.me/Prime_Botz_Support")
-        ],[
-            InlineKeyboardButton("• ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ •", url="https://t.me/Prime_Botz_Support")
-        ],[
-            InlineKeyboardButton("• Mᴏᴠɪᴇs Cʜᴀɴɴᴇʟ •", url="https://t.me/PrimeCineZone"),
-            InlineKeyboardButton("• ᴀʙᴏᴜᴛ •", callback_data="bot")
-        ],[
-            InlineKeyboardButton("⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋", callback_data="start")
-        ]]
-        reply_markup = InlineKeyboardMarkup(btn)
+        try:
+            btn = [[
+                InlineKeyboardButton("• ʀᴇQᴜᴇsᴛ ɢʀᴏᴜᴘ •", url="https://t.me/+OG3sftDEbZ9kMzFl"),
+                InlineKeyboardButton("• Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ •", url="https://t.me/Prime_Botz_Support")
+            ],[
+                InlineKeyboardButton("• ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ •", url="https://t.me/Prime_Botz_Support")
+            ],[
+                InlineKeyboardButton("• Mᴏᴠɪᴇs Cʜᴀɴɴᴇʟ •", url="https://t.me/PrimeCineZone"),
+                InlineKeyboardButton("• ᴀʙᴏᴜᴛ •", callback_data="bot")
+            ],[
+                InlineKeyboardButton("⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋", callback_data="start")
+            ]]
+            reply_markup = InlineKeyboardMarkup(btn)
 
-        await client.edit_message_media(
-            chat_id=query.message.chat.id,
-            message_id=query.message.id,
-            media=InputMediaPhoto(
-                media="https://i.ibb.co/DDKfvJCX/photo-2025-04-14-08-24-42-7493081901167542280.jpg",
-                caption="ʜᴇʀᴇ ɪꜱ ᴀʙᴏᴜᴛ ᴛʜᴇ ʙᴏᴛ ᴀɴᴅ ɪᴛꜱ ꜰᴇᴀᴛᴜʀᴇꜱ...",
-                parse_mode=enums.ParseMode.HTML
-            ),
-            reply_markup=reply_markup
-        )
-    except Exception as e:
-        print(e)
-  
+            await client.edit_message_media(
+                chat_id=query.message.chat.id,
+                message_id=query.message.id,
+                media=InputMediaPhoto(
+                    media="https://i.ibb.co/DDKfvJCX/photo-2025-04-14-08-24-42-7493081901167542280.jpg",
+                    caption="ʜᴇʀᴇ ɪꜱ ᴀʙᴏᴜᴛ ᴛʜᴇ ʙᴏᴛ ᴀɴᴅ ɪᴛꜱ ꜰᴇᴀᴛᴜʀᴇꜱ...",
+                    parse_mode=enums.ParseMode.HTML
+                ),
+                reply_markup=reply_markup
+            )
+        except Exception as e:
+            print(e)
+            
     elif query.data == "give_trial":
         try:
             user_id = query.from_user.id
