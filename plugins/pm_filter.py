@@ -1273,7 +1273,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     InlineKeyboardButton('• ᴜᴘɢʀᴀᴅᴇ •', callback_data="premium"),
                 ],[
                     InlineKeyboardButton('• ʜᴇʟᴘ •', callback_data='features'),
-                    InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='bot')
+                    InlineKeyboardButton('• ᴀʙᴏᴜᴛ ʙᴏᴛᴢ •', callback_data='botz_about')
                 ],[
                     InlineKeyboardButton('• ᴇᴀʀɴ ᴍᴏɴᴇʏ ᴡɪᴛʜ ʙᴏᴛ •', callback_data="earn")
                 ]]
@@ -1288,6 +1288,28 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+
+    elif query.data == "botz_about":
+    try:
+        btn = [[
+            InlineKeyboardButton("• ʀᴇQᴜᴇsᴛ ɢʀᴏᴜᴘ •", url="https://t.me/PrimeCineZone"),
+            InlineKeyboardButton("• Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ •", url="https://t.me/yourgroup")
+        ],[
+            InlineKeyboardButton("• ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ •", callback_data="start")
+        ],[
+            InlineKeyboardButton("• Mᴏᴠɪᴇs Cʜᴀɴɴᴇʟ •", url="https://t.me/PrimeCineZone"),
+            InlineKeyboardButton("• ᴀʙᴏᴜᴛ •", callback_data="bot")
+        ],[
+            InlineKeyboardButton("⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋", callback_data="start")
+        ]]
+        reply_markup = InlineKeyboardMarkup(btn)
+        await query.message.edit_text(
+            text="ʜᴇʀᴇ ɪꜱ ᴀʙᴏᴜᴛ ᴛʜᴇ ʙᴏᴛ ᴀɴᴅ ɪᴛꜱ ꜰᴇᴀᴛᴜʀᴇꜱ...",
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+    except Exception as e:
+        print(e)
   
     elif query.data == "give_trial":
         try:
