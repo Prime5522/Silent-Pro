@@ -134,7 +134,7 @@ async def start(client, message):
             await message.reply_text(f"🎉 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘂𝗹𝗮𝘁𝗶𝗼𝗻𝘀! 𝗬𝗼𝘂 𝘄𝗼𝗻 𝟭𝟬 𝗥𝗲𝗳𝗲𝗿𝗿𝗮𝗹 𝗽𝗼𝗶𝗻𝘁 𝗯𝗲𝗰𝗮𝘂𝘀𝗲 𝗬𝗼𝘂 𝗵𝗮𝘃𝗲 𝗯𝗲𝗲𝗻 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗜𝗻𝘃𝗶𝘁𝗲𝗱 ☞ {uss.mention}!")		    
             await message.reply_text(user_id, f"You have been successfully invited by {message.from_user.mention}!") 	
             seconds = 2592000
-            if seconds > 0:
+            if second > 0:
                 expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
                 user_data = {"id": user_id, "expiry_time": expiry_time}
                 await db.update_user(user_data)		    
@@ -150,138 +150,137 @@ async def start(client, message):
             await client.send_message(user_id, f"𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘂𝗹𝗮𝘁𝗶𝗼𝗻𝘀! 𝗬𝗼𝘂 𝘄𝗼𝗻 𝟭𝟬 𝗥𝗲𝗳𝗲𝗿𝗿𝗮𝗹 𝗽𝗼𝗶𝗻𝘁 𝗯𝗲𝗰𝗮𝘂𝘀𝗲 𝗬𝗼𝘂 𝗵𝗮𝘃𝗲 𝗯𝗲𝗲𝗻 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗜𝗻𝘃𝗶𝘁𝗲𝗱 ☞{message.from_user.mention}!")
         return
           
- 
     if len(message.command) == 2 and message.command[1].startswith('getfile'):
         movies = message.command[1].split("-", 1)[1] 
-        movie = movies.replace('-',' ')
+        movie = movies.replace('-', ' ')
         message.text = movie 
         await auto_filter(client, message) 
-        return    
+        return
 
-data = message.command[1]
-try:
-    pre, grp_id, file_id = data.split('_', 2)
-except:
-    pre, grp_id, file_id = "", 0, data
-
-try:
-    settings = await get_settings(int(data.split("_", 2)[1]))
- #   settings = await get_settings(int(data.split("_", 2)[1]))
-    if settings.get('fsub_id', AUTH_CHANNEL) == AUTH_REQ_CHANNEL:
-        if AUTH_REQ_CHANNEL and not await is_req_subscribed(client, message):
-            try:
-                invite_link = await client.create_chat_invite_link(int(AUTH_REQ_CHANNEL), creates_join_request=True)
-            except ChatAdminRequired:
-                logger.error("Make sure Bot is admin in Forcesub channel")
-                return
-            btn = [
-                [InlineKeyboardButton("⛔️ ᴊᴏɪɴ ɴᴏᴡ ⛔️", url=invite_link.invite_link)]
-            ]
-            if message.command[1] != "subscribe":
-                btn.append([InlineKeyboardButton("♻️ ᴛʀʏ ᴀɢᴀɪɴ ♻️", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-            await client.send_photo(
-                chat_id=message.from_user.id,
-                photo=random.choice(FSUB_IMG),
-                caption=script.FORCESUB_TEXT,
-                reply_markup=InlineKeyboardMarkup(btn),
-                parse_mode=enums.ParseMode.HTML,
-                reply_to_message_id=message.id
-            )
-            return
-    else:
-        id = settings.get('fsub_id', AUTH_CHANNEL)
-        channel = int(id)
-        btn = []
-
-        if channel != AUTH_CHANNEL and not await is_subscribed(client, message.from_user.id, channel):
-            invite_link_custom = await client.create_chat_invite_link(channel)
-            btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 1 ⛔️", url=invite_link_custom.invite_link)])
-
-        if not await is_subscribed(client, message.from_user.id, EXTRA_CHANNEL):
-            invite_link_extra = await client.create_chat_invite_link(EXTRA_CHANNEL)
-            btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 2 ⛔️", url=invite_link_extra.invite_link)])
-
-        if not await is_req_subscribed(client, message):
-            invite_link_default = await client.create_chat_invite_link(int(AUTH_CHANNEL), creates_join_request=True)
-            btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ⛔️", url=invite_link_default.invite_link)])
-
-        if message.command[1] != "subscribe" and (
-            not await is_req_subscribed(client, message) or 
-            not await is_subscribed(client, message.from_user.id, channel)
-        ):
-            btn.append([InlineKeyboardButton("♻️ ᴛʀʏ ᴀɢᴀɪɴ ♻️", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-
-        if btn:
-            await client.send_photo(
-                chat_id=message.from_user.id,
-                photo=random.choice(FSUB_IMG),
-                caption=script.FORCESUB_TEXT,
-                reply_markup=InlineKeyboardMarkup(btn),
-                parse_mode=enums.ParseMode.HTML,
-                reply_to_message_id=message.id
-            )
-            return
-
-except Exception as n:
-    await log_error(client, f"Got Error In Force Subscription Funtion.\n\n Error - {n}")
-    print(f"Error In Fsub :- {n}")
-
-user_id = m.from_user.id
-if not await db.has_premium_access(user_id):
+    data = message.command[1]
     try:
-        grp_id = int(grp_id)
-        user_verified = await db.is_user_verified(user_id)
-        settings = await get_settings(grp_id)
-        is_second_shortener = await db.use_second_shortener(user_id, settings.get('verify_time', TWO_VERIFY_GAP))
-        is_third_shortener = await db.use_third_shortener(user_id, settings.get('third_verify_time', THREE_VERIFY_GAP))
+        pre, grp_id, file_id = data.split('_', 2)
+    except:
+        pre, grp_id, file_id = "", 0, data
 
-        if settings.get("is_verify", IS_VERIFY) and (not user_verified or is_second_shortener or is_third_shortener):
-            verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
-            await db.create_verify_id(user_id, verify_id)
-            temp.VERIFICATIONS[user_id] = grp_id
-
-            if message.command[1].startswith('allfiles'):
-                verify = await get_shortlink(
-                    f"https://telegram.me/{temp.U_NAME}?start=sendall_{user_id}_{verify_id}_{file_id}",
-                    grp_id, is_second_shortener, is_third_shortener
+    try:
+        settings = await get_settings(int(data.split("_", 2)[1]))
+        
+        if settings.get('fsub_id', AUTH_CHANNEL) == AUTH_REQ_CHANNEL:
+            if AUTH_REQ_CHANNEL and not await is_req_subscribed(client, message):
+                try:
+                    invite_link = await client.create_chat_invite_link(int(AUTH_REQ_CHANNEL), creates_join_request=True)
+                except ChatAdminRequired:
+                    logger.error("Make sure Bot is admin in Forcesub channel")
+                    return
+                btn = [
+                    [InlineKeyboardButton("⛔️ ᴊᴏɪɴ ɴᴏᴡ ⛔️", url=invite_link.invite_link)]
+                ]
+                if message.command[1] != "subscribe":
+                    btn.append([InlineKeyboardButton("♻️ ᴛʀʏ ᴀɢᴀɪɴ ♻️", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+                await client.send_photo(
+                    chat_id=message.from_user.id,
+                    photo=random.choice(FSUB_IMG),
+                    caption=script.FORCESUB_TEXT,
+                    reply_markup=InlineKeyboardMarkup(btn),
+                    parse_mode=enums.ParseMode.HTML,
+                    reply_to_message_id=message.id
                 )
-            else:
-                verify = await get_shortlink(
-                    f"https://telegram.me/{temp.U_NAME}?start=notcopy_{user_id}_{verify_id}_{file_id}",
-                    grp_id, is_second_shortener, is_third_shortener
+                return
+        else:
+            id = settings.get('fsub_id', AUTH_CHANNEL)
+            channel = int(id)
+            btn = []
+
+            if channel != AUTH_CHANNEL and not await is_subscribed(client, message.from_user.id, channel):
+                invite_link_custom = await client.create_chat_invite_link(channel)
+                btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 1 ⛔️", url=invite_link_custom.invite_link)])
+
+            if not await is_subscribed(client, message.from_user.id, EXTRA_CHANNEL):
+                invite_link_extra = await client.create_chat_invite_link(EXTRA_CHANNEL)
+                btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 2 ⛔️", url=invite_link_extra.invite_link)])
+
+            if not await is_req_subscribed(client, message):
+                invite_link_default = await client.create_chat_invite_link(int(AUTH_CHANNEL), creates_join_request=True)
+                btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ⛔️", url=invite_link_default.invite_link)])
+
+            if message.command[1] != "subscribe" and (
+                not await is_req_subscribed(client, message) or 
+                not await is_subscribed(client, message.from_user.id, channel)
+            ):
+                btn.append([InlineKeyboardButton("♻️ ᴛʀʏ ᴀɢᴀɪɴ ♻️", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+
+            if btn:
+                await client.send_photo(
+                    chat_id=message.from_user.id,
+                    photo=random.choice(FSUB_IMG),
+                    caption=script.FORCESUB_TEXT,
+                    reply_markup=InlineKeyboardMarkup(btn),
+                    parse_mode=enums.ParseMode.HTML,
+                    reply_to_message_id=message.id
+                )
+                return
+
+    except Exception as n:
+        await log_error(client, f"Got Error In Force Subscription Function.\n\n Error - {n}")
+        print(f"Error In Fsub :- {n}")
+
+    user_id = message.from_user.id
+    if not await db.has_premium_access(user_id):
+        try:
+            grp_id = int(grp_id)
+            user_verified = await db.is_user_verified(user_id)
+            settings = await get_settings(grp_id)
+            is_second_shortener = await db.use_second_shortener(user_id, settings.get('verify_time', TWO_VERIFY_GAP))
+            is_third_shortener = await db.use_third_shortener(user_id, settings.get('third_verify_time', THREE_VERIFY_GAP))
+
+            if settings.get("is_verify", IS_VERIFY) and (not user_verified or is_second_shortener or is_third_shortener):
+                verify_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
+                await db.create_verify_id(user_id, verify_id)
+                temp.VERIFICATIONS[user_id] = grp_id
+
+                if message.command[1].startswith('allfiles'):
+                    verify = await get_shortlink(
+                        f"https://telegram.me/{temp.U_NAME}?start=sendall_{user_id}_{verify_id}_{file_id}",
+                        grp_id, is_second_shortener, is_third_shortener
+                    )
+                else:
+                    verify = await get_shortlink(
+                        f"https://telegram.me/{temp.U_NAME}?start=notcopy_{user_id}_{verify_id}_{file_id}",
+                        grp_id, is_second_shortener, is_third_shortener
+                    )
+
+                howtodownload = settings.get(
+                    'tutorial_3' if is_third_shortener else ('tutorial_2' if is_second_shortener else 'tutorial'),
+                    TUTORIAL_3 if is_third_shortener else (TUTORIAL_2 if is_second_shortener else TUTORIAL)
                 )
 
-            howtodownload = settings.get(
-                'tutorial_3' if is_third_shortener else ('tutorial_2' if is_second_shortener else 'tutorial'),
-                TUTORIAL_3 if is_third_shortener else (TUTORIAL_2 if is_second_shortener else TUTORIAL)
-            )
+                buttons = [
+                    [InlineKeyboardButton("♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴠᴇʀɪꜰʏ ♻️", url=verify)],
+                    [InlineKeyboardButton("⁉️ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪꜰʏ ⁉️", url=howtodownload)]
+                ]
 
-            buttons = [
-                [InlineKeyboardButton("♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴠᴇʀɪꜰʏ ♻️", url=verify)],
-                [InlineKeyboardButton("⁉️ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪꜰʏ ⁉️", url=howtodownload)]
-            ]
+                msg = (
+                    script.THIRDT_VERIFICATION_TEXT if await db.user_verified(user_id) else
+                    (script.SECOND_VERIFICATION_TEXT if is_second_shortener else script.VERIFICATION_TEXT)
+                )
 
-            msg = (
-                script.THIRDT_VERIFICATION_TEXT if await db.user_verified(user_id) else
-                (script.SECOND_VERIFICATION_TEXT if is_second_shortener else script.VERIFICATION_TEXT)
-            )
+                n = await message.reply_text(
+                    text=msg.format(message.from_user.mention),
+                    protect_content=True,
+                    reply_markup=InlineKeyboardMarkup(buttons),
+                    parse_mode=enums.ParseMode.HTML
+                )
 
-            n = await m.reply_text(
-                text=msg.format(message.from_user.mention),
-                protect_content=True,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=enums.ParseMode.HTML
-            )
+                await asyncio.sleep(300)
+                await n.delete()
+                await message.delete()
+                return
 
-            await asyncio.sleep(300)
-            await n.delete()
-            await m.delete()
-            return
-
-    except Exception as e:
-        await log_error(client, f"Got Error In Verification Funtion.\n\n Error - {e}")
-        print(f"Error In Verification - {e}")
-        await message.reply_text("Something Want Wrong ! Message Here - @Prime_Botz_Support")    
+        except Exception as e:
+            await log_error(client, f"Got Error In Verification Function.\n\n Error - {e}")
+            print(f"Error In Verification - {e}")
+            await message.reply_text("Something went wrong! Message here - @Prime_Botz_Support")
         
     if data.split("-", 1)[0] == "BATCH":
         sts = await message.reply("<b>Please wait...</b>")
