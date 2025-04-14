@@ -256,7 +256,7 @@ async def start(client, message):
         except Exception as e:
             await log_error(client, f"Got Error In Verification Funtion.\n\n Error - {e}")
             print(f"Error In Verification - {e}")
-            await message.reply_text(f"Something Want Wrong ! Message Here - @SilentXBotz_Support")
+            await message.reply_text(f"Something Want Wrong ! Message Here - @Prime_Botz_Support")
 
     if data.split("-", 1)[0] == "BATCH":
         sts = await message.reply("<b>Please wait...</b>")
