@@ -166,6 +166,7 @@ except:
 
 try:
     settings = await get_settings(int(data.split("_", 2)[1]))
+ #   settings = await get_settings(int(data.split("_", 2)[1]))
     if settings.get('fsub_id', AUTH_CHANNEL) == AUTH_REQ_CHANNEL:
         if AUTH_REQ_CHANNEL and not await is_req_subscribed(client, message):
             try:
