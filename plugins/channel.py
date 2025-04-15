@@ -60,7 +60,42 @@ async def send_movie_update(bot, file_name, caption):
         unique_id = generate_unique_id(search_movie)
         reaction_counts[unique_id] = {"❤️": 0, "👍": 0, "👎": 0, "🔥": 0}
         user_reactions[unique_id] = {}
-        caption_template = "<b>#Added ✅\n\nName: {}\nQuality: {}\nAudio: {}</b>"
+        caption_template = """
+╔════❰ #ɴᴇᴡ_ꜰɪʟᴇ_ᴀᴅᴅᴇᴅ ✅ ❱═❍⊱❁۪۪
+║╭━━━❰ 🎬 ꜰᴏʀ ʏᴏᴜʀ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ 🎭 ❱━⊱
+║┃🎬 ᴛɪᴛʟᴇ : {}
+║┃🎥 Qᴜᴀʟɪᴛʏ : {}
+║┃🔊 ʟᴀɴɢᴜᴀɢᴇ : {}
+║┃🗒️ ʀᴇʟᴇᴀsᴇ :  {year}
+║╰━━━━━━━━━━━━━━━━━━⊱
+║
+║╭━━━━❰ 📺 ᴠɪᴅᴇᴏ ǫᴜᴀʟɪᴛʏ 📺 ❱━━⊱
+║┃  
+║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉  
+║┃  
+║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉  
+║┃  
+║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉  
+║┃  
+║╰━━━━━━━━━━━━━━━━━━⊱
+║
+║╭━❰ 📚 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴛᴜᴛᴏʀɪᴀʟ ᴠɪᴅᴇᴏ 🎥 ❱━⊱
+║┃       👉 🔴 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ 🔴 👈  
+║╰━━━━━━━━━━━━━━━━⊱
+║
+║╭━━━━❰ 🤝 ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟꜱ & ɢʀᴏᴜᴘꜱ 🤝 ❱━⊱
+║┃
+║┣⪼ ✇ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟꜱ:
+║┃🔹 @Prime_Movies4U
+║┃🔹 @Prime_Botz
+║┃
+║┣⪼ 🎬 ᴍᴏᴠɪᴇ/ᴡᴇʙ ꜱᴇʀɪᴇꜱ ʀᴇQᴜᴇꜱᴛ ɢʀᴏᴜᴘ:
+║┃🔗 https://t.me/Prime_Movies4U/143
+║┃
+║╰━━━━━━━━━━━━━━⊱
+║
+╚══❰ 💠 ꜱᴛᴀʏ ᴇɴᴛᴇʀᴛᴀɪɴᴇᴅ 💠 ❱═❍⊱❁۪۪
+"""
         full_caption = caption_template.format(file_name, quality, language)
         if kind:
             full_caption += f"\n<b>#{kind}</b>"
