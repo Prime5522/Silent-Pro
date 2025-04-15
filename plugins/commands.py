@@ -238,7 +238,7 @@ async def start(client, message):
                 buttons = [
                     [InlineKeyboardButton("♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴠᴇʀɪꜰʏ ♻️", url=verify)],
                     [InlineKeyboardButton("⁉️ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪꜰʏ ⁉️", url=howtodownload)],
-                    [InlineKeyboardButton('• ᴜᴘɢʀᴀᴅᴇ ᴘʟᴀɴ 🔺•', callback_data="premium2")]
+                    [InlineKeyboardButton("💎 ᴜᴩɢʀᴀᴅᴇ ᴛᴏ ᴩʀᴇᴍɪᴜᴍ 💎", callback_data="premium2")]
                 ]
 
                 msg = (
