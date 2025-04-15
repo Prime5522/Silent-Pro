@@ -39,77 +39,102 @@ async def send_movie_update(bot, file_name, caption):
     try:
         file_name = await movie_name_format(file_name)
         caption = await movie_name_format(caption)
+
         year_match = re.search(r"\b(19|20)\d{2}\b", caption)
-        year = year_match.group(0) if year_match else None      
+        year = year_match.group(0) if year_match else None
+
         season_match = re.search(r"(?i)(?:s|season)0*(\d{1,2})", caption) or re.search(r"(?i)(?:s|season)0*(\d{1,2})", file_name)
         if year:
             file_name = file_name[:file_name.find(year) + 4]
         elif season_match:
             season = season_match.group(1)
             file_name = file_name[:file_name.find(season) + 1]
+
         quality = await get_qualities(caption) or "HDRip"
         language = ", ".join([lang for lang in CAPTION_LANGUAGES if lang.lower() in caption.lower()]) or "Not Idea"
+
         if file_name in notified_movies:
-            return 
+            return
         notified_movies.add(file_name)
+
         imdb_data = await get_imdb_details(file_name)
         title = imdb_data.get("title", file_name)
-        kind = imdb_data.get("kind", "").strip().upper().replace(" ", "_") if imdb_data else None
-        poster = await fetch_movie_poster(title, year)        
+        kind = imdb_data.get("kind", "").strip().upper().replace(" ", "") if imdb_data else None
+        imdb_year = imdb_data.get("year", year)
+        year = imdb_year or "Unknown"
+
+        poster = await fetch_movie_poster(title, year)
         search_movie = file_name.replace(" ", "-")
         unique_id = generate_unique_id(search_movie)
+
+        # Initialize reaction storage
         reaction_counts[unique_id] = {"❤️": 0, "👍": 0, "👎": 0, "🔥": 0}
         user_reactions[unique_id] = {}
+
+        # Caption template with Release Year
         caption_template = """
 ╔════❰ #ɴᴇᴡ_ꜰɪʟᴇ_ᴀᴅᴅᴇᴅ ✅ ❱═❍⊱❁۪۪
 ║╭━━━❰ 🎬 ꜰᴏʀ ʏᴏᴜʀ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ 🎭 ❱━⊱
 ║┃🎬 ᴛɪᴛʟᴇ : {}
 ║┃🎥 Qᴜᴀʟɪᴛʏ : {}
 ║┃🔊 ʟᴀɴɢᴜᴀɢᴇ : {}
+║┃🗒️ ʀᴇʟᴇᴀsᴇ : {}
 ║╰━━━━━━━━━━━━━━━━━━⊱
 ║
 ║╭━━━━❰ 📺 ᴠɪᴅᴇᴏ ǫᴜᴀʟɪᴛʏ 📺 ❱━━⊱
-║┃  
-║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉  
-║┃  
-║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉  
-║┃  
-║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉  
-║┃  
+║┃
+║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉
+║┃
+║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉
+║┃
+║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉
+║┃
 ║╰━━━━━━━━━━━━━━━━━━⊱
 ║
 ║╭━❰ 📚 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴛᴜᴛᴏʀɪᴀʟ ᴠɪᴅᴇᴏ 🎥 ❱━⊱
-║┃       👉 🔴 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ 🔴 👈  
+║┃        <a href='https://t.me/Prime_Movie_Watch_Dawnload/75'>👉 🔴 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ 🔴 👈</a>
 ║╰━━━━━━━━━━━━━━━━⊱
 ║
 ║╭━━━━❰ 🤝 ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟꜱ & ɢʀᴏᴜᴘꜱ 🤝 ❱━⊱
 ║┃
 ║┣⪼ ✇ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟꜱ:
-║┃🔹 @Prime_Movies4U
+║┃🔹 @PrimeCineZone
 ║┃🔹 @Prime_Botz
 ║┃
 ║┣⪼ 🎬 ᴍᴏᴠɪᴇ/ᴡᴇʙ ꜱᴇʀɪᴇꜱ ʀᴇQᴜᴇꜱᴛ ɢʀᴏᴜᴘ:
-║┃🔗 https://t.me/Prime_Movies4U/143
+║┃🔗 https://t.me/PrimeCineZone/143
 ║┃
 ║╰━━━━━━━━━━━━━━⊱
 ║
 ╚══❰ 💠 ꜱᴛᴀʏ ᴇɴᴛᴇʀᴛᴀɪɴᴇᴅ 💠 ❱═❍⊱❁۪۪
 """
-        full_caption = caption_template.format(file_name, quality, language)
+
+        full_caption = caption_template.format(file_name, quality, language, year)
+
         if kind:
             full_caption += f"\n<b>#{kind}</b>"
+
         buttons = [[
-            InlineKeyboardButton(f"❤️ {reaction_counts[unique_id]['❤️']}", callback_data=f"r_{unique_id}_{search_movie}_heart"),                
-            InlineKeyboardButton(f"👍 {reaction_counts[unique_id]['👍']}", callback_data=f"r_{unique_id}_{search_movie}_like"),
-            InlineKeyboardButton(f"👎 {reaction_counts[unique_id]['👎']}", callback_data=f"r_{unique_id}_{search_movie}_dislike"),
-            InlineKeyboardButton(f"🔥 {reaction_counts[unique_id]['🔥']}", callback_data=f"r_{unique_id}_{search_movie}_fire")
-        ],[
+            InlineKeyboardButton(f"❤️ {reaction_counts[unique_id]['❤️']}", callback_data=f"r{unique_id}{search_movie}heart"),
+            InlineKeyboardButton(f"👍 {reaction_counts[unique_id]['👍']}", callback_data=f"r{unique_id}{search_movie}like"),
+            InlineKeyboardButton(f"👎 {reaction_counts[unique_id]['👎']}", callback_data=f"r{unique_id}{search_movie}dislike"),
+            InlineKeyboardButton(f"🔥 {reaction_counts[unique_id]['🔥']}", callback_data=f"r{unique_id}{search_movie}_fire")
+        ], [
             InlineKeyboardButton('Get File', url=f'https://telegram.me/{temp.U_NAME}?start=getfile-{search_movie}')
         ]]
+
         image_url = poster or "https://te.legra.ph/file/88d845b4f8a024a71465d.jpg"
-        await bot.send_photo(chat_id=MOVIE_UPDATE_CHANNEL, photo=image_url, caption=full_caption, reply_markup=InlineKeyboardMarkup(buttons))    
+
+        await bot.send_photo(
+            chat_id=MOVIE_UPDATE_CHANNEL,
+            photo=image_url,
+            caption=full_caption,
+            reply_markup=InlineKeyboardMarkup(buttons)
+        )
+
     except Exception as e:
         print(f"Error in send_movie_update: {e}")
+        
 
 @Client.on_callback_query(filters.regex(r"^r_"))
 async def reaction_handler(client, query):
