@@ -85,7 +85,7 @@ async def send_movie_update(bot, file_name, caption):
 ║┃
 ║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉
 ║┃
-║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href='https://telegram.me/{temp.U_NAME}?start=getfile-{search_movie}'>👉 🔴 Get File 🔴 👈</a>
+║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href='https://telegram.me/iPapkorn_PrimeBot?start=getfile-{search_movie}'>👉 🔴 Get File 🔴 👈</a>
 ║┃
 ║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉
 ║┃
