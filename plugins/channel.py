@@ -85,7 +85,7 @@ async def send_movie_update(bot, file_name, caption):
 ║┃
 ║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉
 ║┃
-║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉
+║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href='https://telegram.me/{temp.U_NAME}?start=getfile-{search_movie}'>👉 🔴 Get File 🔴 👈</a>
 ║┃
 ║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉
 ║┃
@@ -129,7 +129,8 @@ async def send_movie_update(bot, file_name, caption):
             chat_id=MOVIE_UPDATE_CHANNEL,
             photo=image_url,
             caption=full_caption,
-            reply_markup=InlineKeyboardMarkup(buttons)
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode="HTML"   
         )
 
     except Exception as e:
