@@ -737,7 +737,7 @@ async def advantage_spoll_choker(bot, query):
                     [[InlineKeyboardButton("🔰Cʟɪᴄᴋ ʜᴇʀᴇ & ʀᴇǫᴜᴇsᴛ ᴛᴏ ᴀᴅᴍɪɴ🔰", url=OWNER_BOTZ)]]
                 )               
                 k = await query.message.edit(script.MVE_NT_FND, reply_markup=contact_admin_button)
-                await asyncio.sleep(10)
+                await asyncio.sleep(30)
                 await k.delete()
                 
 @Client.on_callback_query()
