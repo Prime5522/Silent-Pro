@@ -81,21 +81,21 @@ class script(object):
 
 2:- ᴍᴀᴋᴇ <a href=https://t.me/{}</a> ᴀᴅᴍɪɴ ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ.
 
-3:- ᴄʀᴇᴀᴛᴇ ᴀᴄᴄᴏᴜɴᴛ ᴏɴ ᴀɴʏ sʜᴏʀᴛɴᴇʀ ʟɪᴋᴇ ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴜsᴇ ᴛʜɪs ʙᴇsᴛ sʜᴏʀᴛɴᴇʀ <a href=https://zipshort.net/ref/noyanbanerjee>ᴢɪᴘꜱʜᴏʀᴛ</a>.
+3:- ᴄʀᴇᴀᴛᴇ ᴀᴄᴄᴏᴜɴᴛ ᴏɴ ᴀɴʏ sʜᴏʀᴛɴᴇʀ ʟɪᴋᴇ ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴜsᴇ ᴛʜɪs ʙᴇsᴛ sʜᴏʀᴛɴᴇʀ <a href=https://droplink.co/ref/MRPRIME>ᴅʀᴏʟɪɴᴋ.ᴄᴏ</a>.
 
 4:- ᴛʜᴇɴ sᴇᴛ ʏᴏᴜʀ sʜᴏʀᴛɴᴇʀ ᴅᴇᴛᴀɪʟs ʙʏ ᴛʜɪs ꜰᴏʀᴍᴀᴛ 👇
 
-<code>/set_shortner omegalinks.in a7ac9b3012c67d7491414cf272d82593c75f6cbb</code>
+<code>/set_shortner droplink.co 608fbfe60758ecdfcaf5a30f3a076ab2416a3031</code>
 
-<code>/set_shortner_2 mdiskshortner.link e7beb3c8f756dfa15d0bec495abc65f58c0dfa95</code>
+<code>/set_shortner_2 droplink.co 608fbfe60758ecdfcaf5a30f3a076ab2416a3031</code>
 
-<code>/set_shortner_3 mdiskshortner.link e7beb3c8f756dfa15d0bec495abc65f58c0dfa95</code>
+<code>/set_shortner_3 droplink.co d1e52488bac3d8297d89f895ed8ec64fd04253f8</code>
 
-<code>/set_tutorial https://t.me/DwldMS/19</code>
+<code>/set_tutorial https://t.me/Prime_Movie_Watch_Dawnload/75</code>
 
-<code>/set_tutorial_2 https://t.me/DwldMS/20</code>
+<code>/set_tutorial_2 https://t.me/Prime_Movie_Watch_Dawnload/71</code>
 
-<code>/set_tutorial_3 https://t.me/DwldMS/20</code>
+<code>/set_tutorial_3 https://t.me/Prime_Movie_Watch_Dawnload/71</code>
 
 <code>/set_time 300</code>
 
