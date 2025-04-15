@@ -94,7 +94,7 @@ async def start(client, message):
                     InlineKeyboardButton('+ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ +', url=f'http://telegram.me/{temp.U_NAME}?startgroup=true')
                 ],[
                     InlineKeyboardButton('• ᴇᴀʀɴ ᴍᴏɴᴇʏ •', callback_data="earn"),
-                    InlineKeyboardButton('• ᴜᴘɢʀᴀᴅᴇ •', callback_data="premium"),
+                    InlineKeyboardButton('• ᴜᴘɢʀᴀᴅᴇ ᴘʟᴀɴ •', callback_data="premium"),
                 ],[
                     InlineKeyboardButton('• ʜᴇʟᴘ •', callback_data='features'),
                     InlineKeyboardButton('• ᴀʙᴏᴜᴛ ʙᴏᴛᴢ •', callback_data='botz_about') 
@@ -237,7 +237,8 @@ async def start(client, message):
 
                 buttons = [
                     [InlineKeyboardButton("♻️ ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴠᴇʀɪꜰʏ ♻️", url=verify)],
-                    [InlineKeyboardButton("⁉️ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪꜰʏ ⁉️", url=howtodownload)]
+                    [InlineKeyboardButton("⁉️ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪꜰʏ ⁉️", url=howtodownload)],
+                    [InlineKeyboardButton('💎 ᴜᴘɢʀᴀᴅᴇ ᴛᴏ ᴘʀᴇᴍɪᴜᴍ 💎 •', callback_data="premium")]
                 ]
 
                 msg = (
