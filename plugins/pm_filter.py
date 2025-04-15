@@ -1370,13 +1370,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 InlineKeyboardButton('⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋', callback_data='start')
             ]]
             reply_markup = InlineKeyboardMarkup(btn)                        
-            await client.edit_message_media(                
-                query.message.chat.id, 
-                query.message.id, 
-                InputMediaPhoto(random.choice(PICS))                       
-            )
-            await query.message.edit_text(
-                text=script.BPREMIUM_TXT,
+            
+            await query.message.reply_photo(
+                photo=random.choice(PICS),
+                caption=script.BPREMIUM_TXT,
                 reply_markup=reply_markup,
                 parse_mode=enums.ParseMode.HTML
             )
