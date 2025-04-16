@@ -80,11 +80,11 @@ async def send_movie_update(bot, file_name, caption):
 ║
 ║╭━━━━❰ 📺 ᴠɪᴅᴇᴏ ǫᴜᴀʟɪᴛʏ 📺 ❱━━⊱
 ║┃
-║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">Get File</a>
+║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.co/{title}480p.mkv</a>
 ║┃
-║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">Get File</a>
+║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.co/{title}720p.mkv</a>
 ║┃
-║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">Get File</a>
+║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.co/{title}1080p.mkv</a>
 ║┃
 ║╰━━━━━━━━━━━━━━━━━━⊱
 ║
