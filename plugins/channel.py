@@ -127,7 +127,7 @@ async def send_movie_update(bot, file_name, caption):
             photo=image_url,
             caption=full_caption,
             reply_markup=InlineKeyboardMarkup(buttons),
-            parse_mode="html"
+            parse_mode="HTML"
         )
 
     except Exception as e:
