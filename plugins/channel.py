@@ -35,6 +35,7 @@ async def media(bot, message):
         print(f"Error In Movie Update - {e}")
         pass
 
+
 async def send_movie_update(bot, file_name, caption):
     try:
         file_name = await movie_name_format(file_name)
@@ -52,7 +53,6 @@ async def send_movie_update(bot, file_name, caption):
 
         quality = await get_qualities(caption) or "HDRip"
         language = ", ".join([lang for lang in CAPTION_LANGUAGES if lang.lower() in caption.lower()]) or "Not Idea"
-        
 
         imdb_data = await get_imdb_details(file_name)
         title = imdb_data.get("title", file_name)
@@ -68,23 +68,23 @@ async def send_movie_update(bot, file_name, caption):
         reaction_counts[unique_id] = {"❤️": 0, "👍": 0, "👎": 0, "🔥": 0}
         user_reactions[unique_id] = {}
 
-        # Caption template with Release Year
+        # Caption template
         caption_template = """
 ╔════❰ #ɴᴇᴡ_ꜰɪʟᴇ_ᴀᴅᴅᴇᴅ ✅ ❱═❍⊱❁۪۪
 ║╭━━━❰ 🎬 ꜰᴏʀ ʏᴏᴜʀ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ 🎭 ❱━⊱
-║┃🎬 ᴛɪᴛʟᴇ : {}
-║┃🎥 Qᴜᴀʟɪᴛʏ : {}
-║┃🔊 ʟᴀɴɢᴜᴀɢᴇ : {}
-║┃🗒️ ʀᴇʟᴇᴀsᴇ : {}
+║┃🎬 ᴛɪᴛʟᴇ : {title}
+║┃🎥 Qᴜᴀʟɪᴛʏ : {quality}
+║┃🔊 ʟᴀɴɢᴜᴀɢᴇ : {language}
+║┃🗒️ ʀᴇʟᴇᴀsᴇ : {year}
 ║╰━━━━━━━━━━━━━━━━━━⊱
 ║
 ║╭━━━━❰ 📺 ᴠɪᴅᴇᴏ ǫᴜᴀʟɪᴛʏ 📺 ❱━━⊱
 ║┃
-║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{{search_movie}}">Get File 🔹</a>
+║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">Get File</a>
 ║┃
 ║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">Get File</a>
 ║┃
-║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉https://Primeurl.co/()1080p.mkv
+║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">Get File</a>
 ║┃
 ║╰━━━━━━━━━━━━━━━━━━⊱
 ║
@@ -106,7 +106,13 @@ async def send_movie_update(bot, file_name, caption):
 ╚══❰ 💠 ꜱᴛᴀʏ ᴇɴᴛᴇʀᴛᴀɪɴᴇᴅ 💠 ❱═❍⊱❁۪۪
 """
 
-        full_caption = caption_template.format(file_name, quality, language, year)
+        full_caption = caption_template.format(
+            title=file_name,
+            quality=quality,
+            language=language,
+            year=year,
+            search_movie=search_movie
+        )
 
         if kind:
             full_caption += f"\n<b>#{kind}</b>"
@@ -117,7 +123,7 @@ async def send_movie_update(bot, file_name, caption):
             InlineKeyboardButton(f"👎 {reaction_counts[unique_id]['👎']}", callback_data=f"r{unique_id}{search_movie}dislike"),
             InlineKeyboardButton(f"🔥 {reaction_counts[unique_id]['🔥']}", callback_data=f"r{unique_id}{search_movie}_fire")
         ], [
-            InlineKeyboardButton('Get File', url=f'https://telegram.me/{temp.U_NAME}?start=getfile-{search_movie}')
+            InlineKeyboardButton('Get File', url=f'https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}')
         ]]
 
         image_url = poster or "https://te.legra.ph/file/88d845b4f8a024a71465d.jpg"
@@ -126,11 +132,13 @@ async def send_movie_update(bot, file_name, caption):
             chat_id=MOVIE_UPDATE_CHANNEL,
             photo=image_url,
             caption=full_caption,
-            reply_markup=InlineKeyboardMarkup(buttons)
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode="HTML"
         )
 
     except Exception as e:
         print(f"Error in send_movie_update: {e}")
+        
         
 
 @Client.on_callback_query(filters.regex(r"^r_"))
@@ -144,7 +152,7 @@ async def reaction_handler(client, query):
         new_reaction = data[3]
         user_id = query.from_user.id
         emoji_map = {"heart": "❤️", "like": "👍", "dislike": "👎", "fire": "🔥"}
-        if new_reaction not in emoji_map:
+        if new_reaction notin emoji_map:
             return
         new_emoji = emoji_map[new_reaction]       
         if unique_id not in reaction_counts:
