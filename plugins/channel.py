@@ -80,9 +80,9 @@ async def send_movie_update(bot, file_name, caption):
 ║
 ║╭━━━━❰ 📺 ᴠɪᴅᴇᴏ ǫᴜᴀʟɪᴛʏ 📺 ❱━━⊱
 ║┃
-║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉https://Primeurl.co/()480p.mkv
+║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉 <a href="https://telegram.me/{temp.U_NAME}?start=getfile-{{search_movie}}">Get File</a>
 ║┃
-║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉https://Primeurl.co/()720p.mkv
+║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href="https://telegram.me/{temp.U_NAME}?start=getfile-{{search_movie}}">Get File</a>
 ║┃
 ║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉https://Primeurl.co/()1080p.mkv
 ║┃
@@ -126,7 +126,8 @@ async def send_movie_update(bot, file_name, caption):
             chat_id=MOVIE_UPDATE_CHANNEL,
             photo=image_url,
             caption=full_caption,
-            reply_markup=InlineKeyboardMarkup(buttons)
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode="html"
         )
 
     except Exception as e:
