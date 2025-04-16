@@ -1,110 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{file_name}}</title>
-  <link rel="icon" href="https://i.ibb.co/Hh4kF2b/icon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jisshubot/data@main/fs/src/style.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jisshubot/data@main/fs/src/plyr.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;700&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      background-image: url('https://i.ibb.co/GfTJcFt/photo-2025-04-16-04-20-12-7493761072935993356.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{file_name}}</title>
+    <link rel="icon" href="https://i.ibb.co/Hh4kF2b/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="https://i.ibb.co/Hh4kF2b/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jisshubot/data@main/fs/src/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Jisshubot/data@main/fs/src/plyr.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-950 text-white font-josefin">
+<body>
+    <nav>
+        <div class="nleft">
+            <a href="#">
+                <h3 id="heading" style="z-index: 100;" class="magnet title">PRIME STREAM</h3>
+            </a>
+        </div>
+        <div class="nryt">
+            <a class="home-btn magnet" href="#main" onclick="toggleWidthnav(this)">HOME</a>
 
-  <!-- Navigation Bar -->
-  <nav class="flex justify-between items-center px-6 py-4 bg-gray-900 shadow-md sticky top-0 z-50">
-    <h3 class="text-2xl font-bold magnet title">PRIME STREAM</h3>
-    <div class="flex gap-4">
-      <a class="magnet" href="#main">HOME</a>
-      <a class="magnet" href="#abtus">ABOUT</a>
+            <a href="#abtus" class="about-btn magnet" onclick="toggleWidthnav(this)">ABOUT</a>
+        </div>
+    </nav>
+    <center>
+        <div class="about-nav">
+            <a href="#abtus" class="wlcm magnet" onclick="toggleWidth(this)">WELCOME</a>
+            <a href="#channels" class="abt-chnl magnet" onclick="toggleWidth(this)">CHANNELS</a>
+            <a href="#contact" class="magnet contact-btn" onclick="toggleWidth(this)">CONTACT</a>
+        </div>
+    </center>
+
+    <div class="outer">
+        <div class="inner">
+            <div class="main" id="main">
+                <video id="player" class="player" src="{{file_url}}" type="video/mp4" playsinline controls></video>
+                <div class="player"></div>
+                <div class="file-name">
+                    <h4 style="display: inline;">File Name: </h4>
+                    <p style="display: inline;" id="myDiv">{{file_name}}</p><br>
+                    <h4 style="display: inline;">File Size: </h4>
+                    <p style="display: inline;">{{file_size}}</p>
+                </div>
+                <div class="downloadBtn">
+                    <button class="magnet" onclick="streamDownload()">
+                        <img style="height: 30px;" src="https://i.ibb.co/RjzYttX/dl.png" alt="">download video
+                    </button>
+                    <button class="magnet" onclick="window.location.href='https://t.me/PRIME_MOVIES4U'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Icon">join for more videos
+                    </button>
+                    <button class="magnet" onclick="vlc_player()">
+                        <img src="https://i.ibb.co/px6fQs1/vlc.png" alt="">watch in VLC PLAYER
+                    </button>
+                    <button class="magnet" onclick="mx_player()">
+                        <img src="https://i.ibb.co/41WvtQ3/mx.png" alt="">watch in MX PLAYER
+                    </button>
+                    <button class="magnet" onclick="n_player()">
+                        <img src="https://i.ibb.co/Hd2dS4t/nPlayer.png" alt="">watch in nPlayer
+                    </button>
+                </div>
+
+            </div>
+            <div class="abt">
+                <div class="about">
+                    <div class="about-dets">
+
+                        <div class="abt-sec" id="abtus" style="padding: 160px 30px;">
+                            <h1 style="text-align: center;">WELCOME TO OUR <Span>PRIME STREAM</Span> BOT</h1>
+                            <p style="text-align: center; line-height: 2;word-spacing: 2px;  letter-spacing: 0.8px;">
+                                This is a Telegram Bot to Stream <span>Movies</span> and <span>Series</span> directly on
+                                Telegram. You can also
+                                <span>download</span> them if you want. This bot is developed by <a
+                                    href="https://telegram.dog/PRIME_NAYEM"><span style="font-weight: 700;">MR.PRIME</span></a>
+                                <br><br>If you like this bot, then don't
+                                forget to share it with your friends and family.
+                            </p>
+                        </div>
+
+                        <div class="abt-sec" id="channels">
+                            <h1>JOIN OUR <span>TELEGRAM</span> CHANNELS</h1>
+                            <div class="links chnl-link">
+                                <a class="magnet" href="https://t.me/PRIME_BOTz">
+                                    <button>BOTS CHANNEL</button>
+                                </a>
+                                <a class="magnet" href="https://t.me/Prime_Admin_Support_ProBot">
+                                    <button>PRIME SUPPORT</button>
+                                </a>
+                                <a class="magnet" href="https://t.me/PRIME_MOVIES4U">
+                                    <button>MOVIES CHANNEL</button
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="abt-sec" id="contact">
+                            <p style="text-align: center;">Report Bugs and Contact us on Telegram Below</p>
+                            <div class="links contact">
+                                <a href="https://t.me/Prime_Admin_Support_ProBot">
+                                    <button>CONTACT</button>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <center>
+                <div class="copyright">
+                    <h5 class="text-center">Copyright © 2024 <a href="https://telegram.dog/Prime_Botz"><span
+                                style="font-weight: 700;">𝐏𝐫𝐢𝐦𝐞 𝐁𝐨𝐭'𝐬 🔥</span></a>. All
+                        Rights Reserved.</h5>
+                </div>
+            </center>
+        </footer>
     </div>
-  </nav>
-
-  <!-- Video Section -->
-  <section id="main" class="p-6 text-center">
-    <video id="player" class="player w-full max-w-4xl mx-auto rounded-lg shadow-lg" src="{{file_url}}" type="video/mp4" playsinline controls></video>
-
-    <div class="mt-4">
-      <h4 class="inline font-semibold">File Name:</h4> <span>{{file_name}}</span><br>
-      <h4 class="inline font-semibold">File Size:</h4> <span>{{file_size}}</span>
-    </div>
-
-    <!-- Buttons -->
-    <div class="flex flex-wrap justify-center gap-4 mt-6">
-      <button class="magnet bg-green-600 px-4 py-2 rounded shadow" onclick="streamDownload()">
-        <img class="inline h-5 mr-2" src="https://i.ibb.co/RjzYttX/dl.png" alt="">Download Video
-      </button>
-      <button class="magnet bg-blue-500 px-4 py-2 rounded shadow" onclick="window.location.href='https://t.me/PrimeCineZone'">
-        <img class="inline h-5 mr-2" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="">Join for More
-      </button>
-      <button class="magnet bg-orange-500 px-4 py-2 rounded shadow" onclick="vlc_player()">
-        <img class="inline h-5 mr-2" src="https://i.ibb.co/px6fQs1/vlc.png" alt="">VLC Player
-      </button>
-      <button class="magnet bg-pink-500 px-4 py-2 rounded shadow" onclick="mx_player()">
-        <img class="inline h-5 mr-2" src="https://i.ibb.co/41WvtQ3/mx.png" alt="">MX Player
-      </button>
-      <button class="magnet bg-purple-500 px-4 py-2 rounded shadow" onclick="n_player()">
-        <img class="inline h-5 mr-2" src="https://i.ibb.co/Hd2dS4t/nPlayer.png" alt="">nPlayer
-      </button>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="abtus" class="py-16 px-6 text-center bg-gray-800 mt-10 bg-opacity-80">
-    <h1 class="text-3xl font-bold mb-4">WELCOME TO <span class="text-yellow-400">PRIME STREAM</span> BOT</h1>
-    <p class="leading-7 max-w-3xl mx-auto">
-      This is a Telegram Bot to Stream <span class="font-bold">Movies</span> and <span class="font-bold">Series</span> directly on Telegram. You can also <span class="font-bold">download</span> them. Developed by 
-      <a href="https://telegram.dog/PRIME_NAYEM" class="underline font-bold">MR.PRIME</a>.
-      <br><br>
-      If you like it, don't forget to share with friends!
-    </p>
-  </section>
-
-  <!-- Channels Section -->
-  <section id="channels" class="py-12 px-6 text-center bg-gray-700 bg-opacity-90">
-    <h2 class="text-2xl font-semibold mb-6">JOIN OUR <span class="text-blue-300">TELEGRAM CHANNELS</span></h2>
-    <div class="flex flex-wrap justify-center gap-4">
-      <a href="https://t.me/PRIME_BOTz" class="magnet bg-teal-600 px-5 py-2 rounded">BOTS CHANNEL</a>
-      <a href="https://t.me/Prime_Admin_Support_ProBot" class="magnet bg-indigo-600 px-5 py-2 rounded">PRIME SUPPORT</a>
-      <a href="https://t.me/PrimeCineZone" class="magnet bg-red-600 px-5 py-2 rounded">MOVIES CHANNEL</a>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-10 px-6 text-center bg-gray-800">
-    <p class="mb-4">Report Bugs and Contact us on Telegram:</p>
-    <a href="https://t.me/Prime_Admin_Support_ProBot" class="magnet bg-blue-500 px-5 py-2 rounded">CONTACT</a>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-6 text-center bg-gray-900 text-gray-400 text-sm">
-    Copyright © 2024 
-    <a href="https://telegram.dog/Prime_Botz" class="font-bold text-white">𝐏𝐫𝐢𝐦𝐞 𝐁𝐨𝐭'𝐬</a>. All Rights Reserved.
-  </footer>
-
-  <!-- Final Promo Section Below Footer -->
-  <div class="w-full bg-black py-6 text-center">
-    <img src="https://i.ibb.co/fVFxQT1G/photo-2025-04-16-04-21-49-7493761523907559440.jpg" class="mx-auto max-w-xs rounded shadow" alt="Coming Soon"/>
-  </div>
-
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/automat/controlkit.js@master/bin/controlKit.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sheryjs/dist/Shery.js"></script>
-  <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
-  <script src="https://Jisshubot.github.io/data/fs/src/script.js"></script>
 </body>
-    </html>
-    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/automat/controlkit.js@master/bin/controlKit.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sheryjs/dist/Shery.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const uncopyableElement = document.querySelector(".uncopyable");
+
+        uncopyableElement.addEventListener("selectstart", function (event) {
+            event.preventDefault();
+        });
+    });
+</script>
+<script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
+<script src="https://Jisshubot.github.io/data/fs/src/script.js"></script>
+
+  </html>
