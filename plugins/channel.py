@@ -126,8 +126,7 @@ async def send_movie_update(bot, file_name, caption):
             chat_id=MOVIE_UPDATE_CHANNEL,
             photo=image_url,
             caption=full_caption,
-            reply_markup=InlineKeyboardMarkup(buttons),
-            parse_mode="HTML"
+            reply_markup=InlineKeyboardMarkup(buttons)
         )
 
     except Exception as e:
