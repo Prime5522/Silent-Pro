@@ -152,7 +152,7 @@ async def reaction_handler(client, query):
         new_reaction = data[3]
         user_id = query.from_user.id
         emoji_map = {"heart": "❤️", "like": "👍", "dislike": "👎", "fire": "🔥"}
-        if new_reaction notin emoji_map:
+        if new_reaction not in emoji_map:
             return
         new_emoji = emoji_map[new_reaction]       
         if unique_id not in reaction_counts:
