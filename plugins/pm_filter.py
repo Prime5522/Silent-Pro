@@ -1423,13 +1423,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
         except Exception as e:
             print(e)
 
+    
     elif query.data == "earn":
         try:
             btn = [[ 
                 InlineKeyboardButton('⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋', callback_data='start')
             ]]
             reply_markup = InlineKeyboardMarkup(btn)
-            await query.message.edit_text(
+            await query.message.delete()
+            await query.message.chat.send_message(
                 text=script.EARN_INFO.format(temp.B_LINK),
                 reply_markup=reply_markup,
                 parse_mode=enums.ParseMode.HTML
