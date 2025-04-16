@@ -1428,7 +1428,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         try:
             btn = [
                 [InlineKeyboardButton('💬 ᴘʀɪᴍᴇ ʙᴏᴛᴢ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ 💬', url='https://t.me/Prime_Botz_Support')],
-                [InlineKeyboardButton('⇋ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ ⇋', callback_data='start')]
+                [InlineKeyboardButton('🚫 ᴄʟᴏꜱᴇ 🚫', callback_data='close_data')]
             ]
             reply_markup = InlineKeyboardMarkup(btn)
             await query.message.reply(
