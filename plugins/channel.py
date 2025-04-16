@@ -52,10 +52,7 @@ async def send_movie_update(bot, file_name, caption):
 
         quality = await get_qualities(caption) or "HDRip"
         language = ", ".join([lang for lang in CAPTION_LANGUAGES if lang.lower() in caption.lower()]) or "Not Idea"
-
-        if file_name in notified_movies:
-            return
-        notified_movies.add(file_name)
+        
 
         imdb_data = await get_imdb_details(file_name)
         title = imdb_data.get("title", file_name)
@@ -192,19 +189,34 @@ async def fetch_movie_poster(title, year=None):
         params = {"api_key": TMDB_API, "query": title}
         if year:
             params["year"] = year
+
         res = requests.get("https://api.themoviedb.org/3/search/movie", params=params, timeout=10)
         data = res.json().get("results", [])
         if not data:
-            return None
-        movie_id = data[0].get("id")
-        if not movie_id:
-            return None
-        img_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}/images?api_key={TMDB_API}", timeout=10)
-        backdrops = img_res.json().get("backdrops", [])
-        return f"https://image.tmdb.org/t/p/original{backdrops[0]['file_path']}" if backdrops else None
+            return "https://te.legra.ph/file/88d845b4f8a024a71465d.jpg"
+
+        movie = data[0]
+        movie_id = movie.get("id")
+        poster_path = movie.get("poster_path")
+
+        # Step 1: Use official poster if available
+        if poster_path:
+            return f"https://image.tmdb.org/t/p/original{poster_path}"
+
+        # Step 2: Fallback to backdrop if poster is missing
+        if movie_id:
+            img_res = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}/images?api_key={TMDB_API}", timeout=10)
+            backdrops = img_res.json().get("backdrops", [])
+            if backdrops:
+                return f"https://image.tmdb.org/t/p/original{backdrops[0]['file_path']}"
+
+        # Step 3: Final fallback to default image
+        return "https://te.legra.ph/file/88d845b4f8a024a71465d.jpg"
+
     except Exception as e:
         print(f"Poster fetch error: {e}")
-        return None
+        return "https://te.legra.ph/file/88d845b4f8a024a71465d.jpg"
+
 
 def generate_unique_id(movie_name):
     return hashlib.md5(movie_name.encode('utf-8')).hexdigest()[:5]
