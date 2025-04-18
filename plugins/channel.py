@@ -80,11 +80,11 @@ async def send_movie_update(bot, file_name, caption):
 ║
 ║╭━━━━❰ 📺 ᴠɪᴅᴇᴏ ǫᴜᴀʟɪᴛʏ 📺 ❱━━⊱
 ║┃
-║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.co/{title}480p.mkv</a>
+║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.com-{title}-480p-{quality}.mkv</a>
 ║┃
-║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.co/{title}720p.mkv</a>
+║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.com-{title}-720p-{quality}.mkv</a>
 ║┃
-║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.co/{title}1080p.mkv</a>
+║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.com-{title}-1080p-{quality}.mkv</a>
 ║┃
 ║╰━━━━━━━━━━━━━━━━━━⊱
 ║
@@ -113,9 +113,6 @@ async def send_movie_update(bot, file_name, caption):
             year=year,
             search_movie=search_movie
         )
-
-        if kind:
-            full_caption += f"\n<b>#{kind}</b>"
 
         buttons = [[
             InlineKeyboardButton(f"❤️ {reaction_counts[unique_id]['❤️']}", callback_data=f"r{unique_id}{search_movie}heart"),
