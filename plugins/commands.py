@@ -79,7 +79,7 @@ async def start(client, message):
         return 
     
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        silenxbotz=await message.reply_sticker("CAACAgEAAxkBAAENpaZnl898tVVOj-69IH89gx-8ee-CCAACWwIAAu8vQEXX2jgCrI2F-jYE")
+        silenxbotz=await message.reply_sticker("CAACAgUAAxkBAAIhiGgChBCFgBzBMErPOr8TJBl8MSJiAAJ9GQACSnqRVJrQkxEqYXj1HgQ")
         await asyncio.sleep(5)
         await silenxbotz.delete()
         await message.reply_text(
@@ -256,7 +256,7 @@ async def start(client, message):
 
                 n = await message.reply_text(
                     text=msg.format(message.from_user.mention),
-                    protect_content=True,
+                    protect_content=False,
                     reply_markup=InlineKeyboardMarkup(buttons),
                     parse_mode=enums.ParseMode.HTML
                 )
