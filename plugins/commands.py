@@ -76,11 +76,19 @@ async def start(client, message):
         )
         await asyncio.sleep(300)
         await dlt.delete()
-        return         
+        return 
+    
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         silenxbotz=await message.reply_sticker("CAACAgEAAxkBAAENpaZnl898tVVOj-69IH89gx-8ee-CCAACWwIAAu8vQEXX2jgCrI2F-jYE")
         await asyncio.sleep(5)
         await silenxbotz.delete()
+        await message.reply_text(
+            "🤖 ɪ ᴀᴍ ᴛʜᴇ ғɪʀsᴛ ᴀɴᴅ ᴍᴏsᴛ ᴀᴅᴠᴀɴᴄᴇᴅ ᴍᴏᴠɪᴇ ᴀɴᴅ ᴡᴇʙ sᴇʀɪᴇs ᴘʀᴏᴠɪᴅᴇʀ ʙᴏᴛ. ᴊᴜsᴛ ɢɪᴠᴇ ᴍᴇ ᴀ ᴄᴏʀʀᴇᴄᴛ ɴᴀᴍᴇ ᴀɴᴅ ɪ ᴡɪʟʟ ᴇxᴛʀᴀᴄᴛ ᴛʜᴇ ғɪʟᴇ ғᴏʀ ʏᴏᴜ ɴɪᴄᴇʟʏ.\n\n"
+            "✔️ ʙᴇғᴏʀᴇ ᴍᴀᴋɪɴɢ ᴀ ʀᴇǫᴜᴇsᴛ, ʙᴇ sᴜʀᴇ ᴛᴏ ᴄʜᴇᴄᴋ ᴛʜᴇ ᴄᴏʀʀᴇᴄᴛ sᴘᴇʟʟɪɴɢ ᴀɴᴅ ʀᴇʟᴇᴀsᴇ ʏᴇᴀʀ ғʀᴏᴍ ɢᴏᴏɢʟᴇ.\n\n"
+            "🙏 ᴛʜᴇɴ ɪ ʜᴏᴘᴇ ʏᴏᴜʀ ʙʀᴏᴛʜᴇʀ ᴡɪʟʟ ɢᴇᴛ ɪᴛ.\n\n"
+            "✨ ᴛʜᴀɴᴋ ʏᴏᴜ ꜰᴏʀ ᴜsɪɴɢ ᴏᴜʀ @iPapkornprimebot"
+        )
+        
         if not await db.get_chat(message.chat.id):
             total=await client.get_chat_members_count(message.chat.id)
             await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown"))       
