@@ -409,14 +409,10 @@ Mᴇꜱꜱᴀɢᴇ : <b>{}</b>
    # CAPTION = """<b><a href="https://t.me/SilentXBotz">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a https://t.me/SilentXBotz>[SilentXBotz]</a></b>"""
 
     CAPTION = """
-╭─━━━⌁ 𝙁𝙄𝙇𝙀 𝙉𝘼𝙈𝙀 ⌁━━━─╮
-┃ 📂 <b>𝐅𝐢𝐥𝐞 𝐍𝐚𝐦𝐞 :</b> <code>{file_name}</code>
-╰───────────────────╯
-
 ╭─━━━⌁ 𝘾𝙊𝙉𝙏𝙀𝙉𝙏 𝙄𝙉𝙁𝙊 ⌁━━━─╮
-┃ ⚙️ 𝐅𝐢𝐥𝐞 𝐒𝐢𝐳𝐞     : <b>{file_size}</b>
-┃ 🉑 𝐋𝐚𝐧𝐠𝐮𝐚𝐠𝐞    : <b>{language}</b>
-┃ 🗓️ 𝐑𝐞𝐥𝐞𝐚𝐬𝐞 𝐘𝐞𝐚𝐫 : <b>{year}</b>
+┃ 📂 <b>𝐅𝐢𝐥𝐞 𝐍𝐚𝐦𝐞 :</b> <code>{file_name}</code>
+┃
+┃ ⚙️ <b>𝐅𝐢𝐥𝐞 𝐒𝐢𝐳𝐞  :</b> <b>{file_size}</b> 
 ╰──────────────────────╯
 
 ╭─━━━⌁ ᴏꜰꜰɪᴄɪᴀʟ ɴᴇᴛᴡᴏʀᴋ ⌁━━━─╮
