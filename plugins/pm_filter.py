@@ -40,6 +40,9 @@ import requests
 import string
 import tracemalloc
 
+import os
+req_channel = int(os.environ.get('REQ_CHANNEL', -1002120012639))
+
 tracemalloc.start()
 
 TIMEZONE = "Asia/Kolkata"
