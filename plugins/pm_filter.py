@@ -1693,62 +1693,91 @@ async def cb_handler(client: Client, query: CallbackQuery):
     
 async def auto_filter(client, msg, spoll=False):
     curr_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
+
     if not spoll:
         message = msg
-        if message.text.startswith("/"): return
-        if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
+        if message.text.startswith("/"):
             return
+
+        if re.findall(r"((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
+            return
+
         if len(message.text) < 100:
-            search = message.text         
-            search = search.lower()
-            m=await message.reply_text(f'🤖 <i>{search} <b>sᴇᴀʀᴄʜɪɴɢ...</b></i>', reply_to_message_id=message.id)
+            search = message.text.lower()
+            m = await message.reply_text(
+                f'🤖 <i>{search} <b>sᴇᴀʀᴄʜɪɴɢ...</b></i>',
+                reply_to_message_id=message.id
+            )
+
+            # প্রাসঙ্গিক শব্দ বাদ দিয়ে ক্লিন সার্চ তৈরি করা
             find = search.split(" ")
             search = ""
-            removes = ["in","upload", "series", "full", "horror", "thriller", "mystery", "print", "file"]
+            removes = ["in", "upload", "series", "full", "horror", "thriller", "mystery", "print", "file"]
             for x in find:
                 if x in removes:
                     continue
-                else:
-                    search = search + x + " "
-            search = search.replace("-", " ")
-            search = search.replace(":","")
-            files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
+                search += x + " "
+            search = search.replace("-", " ").replace(":", "")
+
+            # সার্চ করা
+            files, offset, total_results = await get_search_results(message.chat.id, search, offset=0, filter=True)
             settings = await get_settings(message.chat.id)
+
+            # কিছু না পেলে, অ্যাডভান্স চেকিং আগে
             if not files:
-                await client.send_message(
-    req_channel,
-    f"#REQUESTED_LOGS\n\nCONTENT NAME: '{search}'\nREQUEST BY: {message.from_user.first_name}\nUSER ID: {message.from_user.id}",
-    reply_markup=InlineKeyboardMarkup([
-        [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}")],
-        [InlineKeyboardButton("❌ Check Your Spelling", callback_data=f"action_spellcheck_{message.from_user.id}")],
-        [InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}")],
-        [InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}")],
-        [InlineKeyboardButton("💥 Close", callback_data="close_data")]
-    ])
-                )
-                if settings["spell_check"]:           
+                if settings["spell_check"]:
                     ai_sts = await m.edit('🤖 ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ, ᴀɪ ɪꜱ ᴄʜᴇᴄᴋɪɴɢ ʏᴏᴜʀ ꜱᴘᴇʟʟɪɴɢ...')
-                    is_misspelled = await ai_spell_check(chat_id = message.chat.id,wrong_name=search)
+                    is_misspelled = await ai_spell_check(chat_id=message.chat.id, wrong_name=search)
+
                     if is_misspelled:
-                        await ai_sts.edit(f'<b>✅Aɪ Sᴜɢɢᴇsᴛᴇᴅ ᴍᴇ<code> {is_misspelled}</code> \nSᴏ Iᴍ Sᴇᴀʀᴄʜɪɴɢ ғᴏʀ <code>{is_misspelled}</code></b>')
+                        await ai_sts.edit(
+                            f'<b>✅ Aɪ Sᴜɢɢᴇsᴛᴇᴅ ᴍᴇ<code> {is_misspelled}</code>\nSᴏ Iᴍ Sᴇᴀʀᴄʜɪɴɢ ғᴏʀ <code>{is_misspelled}</code></b>'
+                        )
                         await asyncio.sleep(2)
                         message.text = is_misspelled
                         await ai_sts.delete()
                         return await auto_filter(client, message)
+
                     await ai_sts.delete()
-                    return await advantage_spell_chok(client, message)
-        else:
-            return
+
+                    # অ্যাডভান্স চেকিং
+                    found = await advantage_spell_chok(client, message)
+                    if found:
+                        return
+
+                # অ্যাডভান্স চেকিং না পেলে, চ্যানেলে পোস্ট করা হবে
+                await client.send_message(
+                    req_channel,
+                    f"#REQUESTED_LOGS\n\nCONTENT NAME: '{search}'\nREQUEST BY: {message.from_user.first_name}\nUSER ID: {message.from_user.id}",
+                    reply_markup=InlineKeyboardMarkup([
+                        [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}")],
+                        [InlineKeyboardButton("❌ Check Your Spelling", callback_data=f"action_spellcheck_{message.from_user.id}")],
+                        [InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}")],
+                        [InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}")],
+                        [
+                            InlineKeyboardButton("🔎 Check in Google", url=f"https://www.google.com/search?q={search.replace(' ', '+')}"),
+                            InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}")
+                        ],
+                        [InlineKeyboardButton("💥 Close", callback_data="close_data")]
+                    ])
+                )
+                return
     else:
         message = msg.message.reply_to_message
         search, files, offset, total_results = spoll
-        m=await message.reply_text(f'🤖 <i>{search} <b>sᴇᴀʀᴄʜɪɴɢ...</b></i>', reply_to_message_id=message.id)
+        m = await message.reply_text(
+            f'🤖 <i>{search} <b>sᴇᴀʀᴄʜɪɴɢ...</b></i>',
+            reply_to_message_id=message.id
+        )
         settings = await get_settings(message.chat.id)
         await msg.message.delete()
+
+    # সার্চ ফলাফল সেভ করা
     key = f"{message.chat.id}-{message.id}"
     FRESH[key] = search
     temp.GETALL[key] = files
     temp.SHORT[message.from_user.id] = message.chat.id
+
     if settings["button"]:
         btn = [
             [
