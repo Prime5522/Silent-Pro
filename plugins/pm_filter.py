@@ -742,7 +742,42 @@ async def advantage_spoll_choker(bot, query):
                 k = await query.message.edit(script.MVE_NT_FND, reply_markup=contact_admin_button)
                 await asyncio.sleep(30)
                 await k.delete()
-                
+
+@app.on_callback_query(filters.regex(r"action_(\w+)_(\d+)"))
+async def handle_actions(client, callback_query):
+    action, user_id = callback_query.data.split("_")[1:]
+    user_id = int(user_id)
+
+    try:
+        if action == "uploaded":
+            text = (
+                "✅ Your requested content has been uploaded.\n"
+                "Please check the channel."
+            )
+        elif action == "spellcheck":
+            text = (
+                "❌ There seems to be a spelling mistake in your request.\n"
+                "Please check the correct spelling on Google and try again."
+            )
+        elif action == "notreleased":
+            text = (
+                "⏳ The content you requested has not been released yet."
+            )
+        elif action == "processing":
+            text = (
+                "🛠️ Your request is currently being processed.\n"
+                "We’ll notify you once it’s available."
+            )
+        else:
+            text = "Invalid action."
+
+        await client.send_message(user_id, text)
+        await callback_query.answer("Message sent to the user.", show_alert=True)
+
+    except Exception:
+        await callback_query.answer("❗ The user has not started the bot yet!", show_alert=True)
+        
+
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
     lazyData = query.data
@@ -1680,7 +1715,17 @@ async def auto_filter(client, msg, spoll=False):
             files, offset, total_results = await get_search_results(message.chat.id ,search, offset=0, filter=True)
             settings = await get_settings(message.chat.id)
             if not files:
-                await client.send_message(req_channel, f"#REQUESTED_LOGS\n\nCONTENT NAME: '{search}'\nREQUEST BY: {message.from_user.first_name}\nUSER ID: {message.from_user.id}", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💥 Mark Us Done 💥", callback_data="close_data")]]))
+                await client.send_message(
+    req_channel,
+    f"#REQUESTED_LOGS\n\nCONTENT NAME: '{search}'\nREQUEST BY: {message.from_user.first_name}\nUSER ID: {message.from_user.id}",
+    reply_markup=InlineKeyboardMarkup([
+        [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}")],
+        [InlineKeyboardButton("❌ Check Your Spelling", callback_data=f"action_spellcheck_{message.from_user.id}")],
+        [InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}")],
+        [InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}")],
+        [InlineKeyboardButton("💥 Close", callback_data="close_data")]
+    ])
+                )
                 if settings["spell_check"]:           
                     ai_sts = await m.edit('🤖 ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ, ᴀɪ ɪꜱ ᴄʜᴇᴄᴋɪɴɢ ʏᴏᴜʀ ꜱᴘᴇʟʟɪɴɢ...')
                     is_misspelled = await ai_spell_check(chat_id = message.chat.id,wrong_name=search)
