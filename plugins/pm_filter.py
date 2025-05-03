@@ -742,8 +742,8 @@ async def advantage_spoll_choker(bot, query):
                 k = await query.message.edit(script.MVE_NT_FND, reply_markup=contact_admin_button)
                 await asyncio.sleep(30)
                 await k.delete()
-
-@app.on_callback_query(filters.regex(r"action_(\w+)_(\d+)"))
+                
+@Client.on_callback_query(filters.regex(r"action_(\w+)_(\d+)"))
 async def handle_actions(client, callback_query):
     action, user_id = callback_query.data.split("_")[1:]
     user_id = int(user_id)
