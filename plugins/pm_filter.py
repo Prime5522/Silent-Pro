@@ -768,11 +768,6 @@ async def handle_actions(client, callback_query):
                 "🛠️ Your request is currently being processed.\n"
                 "We’ll notify you once it’s available."
             )
-        #elif action == "typeinenglish":
-           # text = (
-             #   "✍️ Please try typing the movie name in English.\n"
-              #  "You just have to write the name in English. Just write the name of the movie or web series in English and it will come up automatically."
-          #  )
         else:
             text = "Invalid action."
 
