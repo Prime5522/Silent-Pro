@@ -1751,20 +1751,34 @@ async def auto_filter(client, msg, spoll=False):
                         return
 
                 # অ্যাডভান্স চেকিং না পেলে, চ্যানেলে পোস্ট করা হবে
-                await client.send_message(
-                    req_channel,
-                    f"#REQUESTED_LOGS\n\nCONTENT NAME: '{search}'\nREQUEST BY: {message.from_user.first_name}\nUSER ID: {message.from_user.id}",
-                    reply_markup=InlineKeyboardMarkup([
-                        [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}")],
-                        [InlineKeyboardButton("❌ Check Your Spelling", callback_data=f"action_spellcheck_{message.from_user.id}")],
-                        [InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}")],
-                        [InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}")],
-                        [
-                            InlineKeyboardButton("🔎 Check in Google", url=f"https://www.google.com/search?q={search.replace(' ', '+')}"),
-                            InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}")
-                        ],
-                        [InlineKeyboardButton("💥 Close", callback_data="close_data")]
-                    ])
+                await client.send_message(  
+    req_channel,  
+    f"#REQUESTED_LOGS\n\n"
+    f"**CONTENT NAME:** `{search}`\n"
+    f"**REQUEST BY:** {message.from_user.first_name}\n"
+    f"**USER ID:** `{message.from_user.id}`",  
+    reply_markup=InlineKeyboardMarkup([  
+        # বড় বোতাম - Uploaded Done
+        [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}")],
+
+        # পাশাপাশি দুইটা ছোট বোতাম - Spelling Check & Not Released
+        [  
+            InlineKeyboardButton("❌ Check Spelling", callback_data=f"action_spellcheck_{message.from_user.id}"),  
+            InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}")  
+        ],
+
+        # বড় বোতাম - Google Search
+        [InlineKeyboardButton("🔎 Search on Google", url=f"https://www.google.com/search?q={search.replace(' ', '+')}")],  
+
+        # পাশাপাশি দুইটা বড় বোতাম - Processing & Type in English
+        [  
+            InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}"),  
+            InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}")  
+        ],
+
+        # বড় বোতাম - Close
+        [InlineKeyboardButton("💥 Close", callback_data="close_data")]  
+    ])  
                 )
                 return
     else:
@@ -1981,7 +1995,7 @@ async def advantage_spell_chok(client, message):
             InlineKeyboardButton("🔍 ᴄʜᴇᴄᴋ sᴘᴇʟʟɪɴɢ ᴏɴ ɢᴏᴏɢʟᴇ 🔎", url=f"https://www.google.com/search?q={google}")
         ]]
         k = await message.reply_text(text=script.I_CUDNT.format(search), reply_markup=InlineKeyboardMarkup(button))
-        await asyncio.sleep(60)
+        await asyncio.sleep(30)
         await k.delete()
         try:
             await message.delete()
@@ -1998,7 +2012,7 @@ async def advantage_spell_chok(client, message):
         [InlineKeyboardButton(text="🚫 ᴄʟᴏsᴇ 🚫", callback_data='close_data')]
     )
     d = await message.reply_text(text=script.CUDNT_FND.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(buttons), reply_to_message_id=message.id)
-    await asyncio.sleep(60)
+    await asyncio.sleep(10)
     await d.delete()
     try:
         await message.delete()
