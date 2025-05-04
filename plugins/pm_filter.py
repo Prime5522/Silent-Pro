@@ -768,11 +768,11 @@ async def handle_actions(client, callback_query):
                 "🛠️ Your request is currently being processed.\n"
                 "We’ll notify you once it’s available."
             )
-        elif action == "typeinenglish":
-            text = (
-                "✍️ Please try typing the movie name in English.\n"
-                "You just have to write the name in English. Just write the name of the movie or web series in English and it will come up automatically."
-            )
+        #elif action == "typeinenglish":
+           # text = (
+             #   "✍️ Please try typing the movie name in English.\n"
+              #  "You just have to write the name in English. Just write the name of the movie or web series in English and it will come up automatically."
+          #  )
         else:
             text = "Invalid action."
 
@@ -1759,10 +1759,6 @@ async def auto_filter(client, msg, spoll=False):
                         [InlineKeyboardButton("❌ Check Your Spelling", callback_data=f"action_spellcheck_{message.from_user.id}")],
                         [InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}")],
                         [InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}")],
-                        [
-                            InlineKeyboardButton("🔎 Check in Google", url=f"https://www.google.com/search?q={search.replace(' ', '+')}"),
-                            InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}")
-                        ],
                         [InlineKeyboardButton("💥 Close", callback_data="close_data")]
                     ])
                 )
