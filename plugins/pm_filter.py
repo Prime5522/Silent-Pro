@@ -743,40 +743,97 @@ async def advantage_spoll_choker(bot, query):
                 await asyncio.sleep(30)
                 await k.delete()
                 
-@Client.on_callback_query(filters.regex(r"action_(\w+)_(\d+)"))
+@Client.on_callback_query(filters.regex(r"action_(\w+)_(\d+)_(.+)"))
 async def handle_actions(client, callback_query):
-    action, user_id = callback_query.data.split("_")[1:]
+    action, user_id, search_raw = callback_query.data.split("_", 2)
     user_id = int(user_id)
+    search = search_raw.replace("_", " ")
 
     try:
+        user = await client.get_users(user_id)
+        mention = f"Hey {user.first_name}!\n\n"
+
         if action == "uploaded":
             text = (
-                "✅ Your requested content has been uploaded.\n"
-                "Please check the channel."
+                f"{mention}"
+                f"✅ Your request for: *{search}*\n"
+                f"has been uploaded. Please check the channel."
             )
+            await client.send_message(user_id, text, parse_mode="markdown")
+
         elif action == "spellcheck":
             text = (
-                "❌ There seems to be a spelling mistake in your request.\n"
-                "Please check the correct spelling on Google and try again."
+                f"{mention}"
+                f"❌ It seems there's a spelling mistake in your request for: *{search}*\n"
+                f"Please check Google for the correct spelling and try again."
             )
+            await client.send_photo(
+                user_id,
+                photo="https://i.ibb.co/fYmDHQw2/photo-2025-05-03-13-08-47-7501007683491725340.jpg",  # স্পেলচেক ইমেজ
+                caption=text,
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton(
+                        "🔎 Check on Google",
+                        url=f"https://www.google.com/search?q={search.replace(' ', '+')}"
+                    )
+                ]]),
+                parse_mode="markdown"
+            )
+
         elif action == "notreleased":
             text = (
-                "⏳ The content you requested has not been released yet."
+                f"{mention}"
+                f"⏳ Your request for: *{search}*\n"
+                f"has not been released yet. Please stay tuned."
             )
+            await client.send_photo(
+                user_id,
+                photo="https://i.ibb.co/fzRNc5wV/photo-2025-05-05-16-57-16-7501007601887346724.jpg",  # নট রিলিজড ইমেজ
+                caption=text,
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton(
+                        "🔎 Check on Google",
+                        url=f"https://www.google.com/search?q={search.replace(' ', '+')}+release+date"
+                    )
+                ]]),
+                parse_mode="markdown"
+            )
+
         elif action == "processing":
             text = (
-                "🛠️ Your request is currently being processed.\n"
-                "We’ll notify you once it’s available."
+                f"{mention}"
+                f"🛠️ Your request for: *{search}*\n"
+                f"is currently being processed. We’ll notify you once it’s ready."
             )
+            await client.send_message(user_id, text, parse_mode="markdown")
+
         elif action == "typeinenglish":
             text = (
-                "✍️ Please try typing the movie name in English.\n"
-                "You just have to write the name in English.\nJust write the name of the movie or web series in English and it will come up automatically."
+                f"{mention}"
+                f"🔤 Your request for: *{search}*\n"
+                f"should be typed in English. Please try again using English letters only."
             )
-        else:
-            text = "Invalid action."
+            await client.send_message(user_id, text, parse_mode="markdown")
 
-        await client.send_message(user_id, text)
+        elif action == "notavailable":
+            text = (
+                f"{mention}"
+                f"🚫 Your request for: *{search}*\n"
+                f"is currently not available. Please try again later."
+            )
+            await client.send_message(user_id, text, parse_mode="markdown")
+        elif action == "contact":
+            text = (
+                f"{mention}"
+                f"If you're facing any issue or need help regarding your request for: *{search}*\n"
+                f"Feel free to contact us below.\n\n"
+                f"🔗 @MR_PRIME_KING"
+            )
+            await client.send_message(user_id, text, parse_mode="markdown")
+    
+        else:
+            await client.send_message(user_id, "Invalid action.")
+
         await callback_query.answer("Message sent to the user.", show_alert=True)
 
     except Exception:
