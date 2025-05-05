@@ -1814,28 +1814,34 @@ async def auto_filter(client, msg, spoll=False):
     f"**CONTENT NAME:** `{search}`\n"
     f"**REQUEST BY:** {message.from_user.first_name}\n"
     f"**USER ID:** `{message.from_user.id}`",  
-    reply_markup=InlineKeyboardMarkup([  
-        # বড় বোতাম - Uploaded Done
-        [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}")],
+    reply_markup=InlineKeyboardMarkup([
+    # বড় বোতাম - Uploaded Done
+    [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}_{search.replace(' ', '_')}")],
 
-        # পাশাপাশি দুইটা ছোট বোতাম - Spelling Check & Not Released
-        [  
-            InlineKeyboardButton("❌ Check Spelling", callback_data=f"action_spellcheck_{message.from_user.id}"),  
-            InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}")  
-        ],
+    # পাশাপাশি দুইটা ছোট বোতাম - Spelling Check & Not Released
+    [
+        InlineKeyboardButton("❌ Check Spelling", callback_data=f"action_spellcheck_{message.from_user.id}_{search.replace(' ', '_')}"),
+        InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}_{search.replace(' ', '_')}")
+    ],
 
-        # বড় বোতাম - Google Search
-        [InlineKeyboardButton("🔎 Search on Google", url=f"https://www.google.com/search?q={search.replace(' ', '+')}")],  
+    # বড় বোতাম - Not Available
+    [InlineKeyboardButton("🚫 Not Available", callback_data=f"action_notavailable_{message.from_user.id}_{search.replace(' ', '_')}")],
 
-        # পাশাপাশি দুইটা বড় বোতাম - Processing & Type in English
-        [  
-            InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}"),  
-            InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}")  
-        ],
+    # বড় বোতাম - Google Search
+    [InlineKeyboardButton("🔎 Search on Google", url=f"https://www.google.com/search?q={search.replace(' ', '+')}")],
 
-        # বড় বোতাম - Close
-        [InlineKeyboardButton("💥 Close", callback_data="close_data")]  
-    ])  
+    # পাশাপাশি দুইটা বড় বোতাম - Processing & Type in English
+    [
+        InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}_{search.replace(' ', '_')}"),
+        InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}_{search.replace(' ', '_')}")
+    ],
+
+    # নতুন বাটন - Contact Us
+    [InlineKeyboardButton("📞 Contact Us", callback_data=f"action_contact_{message.from_user.id}_{search.replace(' ', '_')}")],
+
+    # বড় বোতাম - Close
+    [InlineKeyboardButton("💥 Close", callback_data="close_data")]
+])
                 )
                 return
     else:
