@@ -1749,7 +1749,7 @@ async def auto_filter(client, msg, spoll=False):
     req_channel,  
     f"#REQUESTED_LOGS\n\n"
     f"**CONTENT NAME:** `{search}`\n"
-    f"**REQUEST BY:** tg://openmessage?user_id={message.from_user.id}\n"
+    f"**USER ID:** tg://openmessage?user_id={message.from_user.id}\n"
     f"**USER NAME:** {message.from_user.first_name}",  
     reply_markup=InlineKeyboardMarkup([  
         # বড় বোতাম - Uploaded Done
