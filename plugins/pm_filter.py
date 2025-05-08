@@ -743,41 +743,35 @@ async def advantage_spoll_choker(bot, query):
                 await asyncio.sleep(30)
                 await k.delete()
                 
-@Client.on_callback_query(filters.regex(r"action_(\w+)_(\d+)"))
+@Client.on_callback_query(filters.regex(r"action_(\w+)_(\d+)\|(.+)"))
 async def handle_actions(client, callback_query):
-    action, user_id = callback_query.data.split("_")[1:]
+    action, user_id, search = re.match(r"action_(\w+)_(\d+)\|(.+)", callback_query.data).groups()
     user_id = int(user_id)
 
     try:
+        user_mention = f"<b>👤 Hey!</b>"
+        search_line = f"🔍 You searched for: <code>{search}</code>\n\n"
+
         if action == "uploaded":
-            text = (
-                "✅ Your requested content has been uploaded.\n"
-                "Please check the channel."
-            )
+            message_text = "✅ <b>Your requested content is now available.</b>\nPlease check the channel."
         elif action == "spellcheck":
-            text = (
-                "❌ There seems to be a spelling mistake in your request.\n"
-                "Please check the correct spelling on Google and try again."
-            )
+            message_text = "❌ <b>There seems to be a spelling mistake in your request.</b>\nPlease check on Google and try again."
         elif action == "notreleased":
-            text = (
-                "⏳ The content you requested has not been released yet."
-            )
+            message_text = "⏳ <b>The content you requested has not been released yet.</b>"
         elif action == "processing":
-            text = (
-                "🛠️ Your request is currently being processed.\n"
-                "We’ll notify you once it’s available."
-            )
+            message_text = "🛠️ <b>Your request is currently being processed.</b>\nWe’ll notify you once it’s available."
         elif action == "typeinenglish":
-            text = (
-                "✍️ Please try typing the movie name in English.\n"
-                "You just have to write the name in English.\nJust write the name of the movie or web series in English and it will come up automatically."
+            message_text = (
+                "✍️ <b>Please try typing the movie name in English.</b>\n"
+                "Just write the name of the movie or web series in English, and it will come up automatically."
             )
         else:
-            text = "Invalid action."
+            message_text = "⚠️ Invalid action."
 
-        await client.send_message(user_id, text)
-        await callback_query.answer("Message sent to the user.", show_alert=True)
+        final_msg = f"{user_mention}\n{search_line}{message_text}"
+
+        await client.send_message(user_id, final_msg)
+        await callback_query.answer("✅ Message sent to the user.", show_alert=True)
 
     except Exception:
         await callback_query.answer("❗ The user has not started the bot yet!", show_alert=True)
@@ -1759,12 +1753,12 @@ async def auto_filter(client, msg, spoll=False):
     f"**USER ID:** `{message.from_user.id}`",  
     reply_markup=InlineKeyboardMarkup([  
         # বড় বোতাম - Uploaded Done
-        [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}")],
+        [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}|{search.strip()}")],
 
         # পাশাপাশি দুইটা ছোট বোতাম - Spelling Check & Not Released
         [  
-            InlineKeyboardButton("❌ Check Spelling", callback_data=f"action_spellcheck_{message.from_user.id}"),  
-            InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}")  
+            InlineKeyboardButton("❌ Check Spelling", callback_data=f"action_spellcheck_{message.from_user.id}|{search.strip()}"),  
+            InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}|{search.strip()}")  
         ],
 
         # বড় বোতাম - Google Search
@@ -1772,8 +1766,8 @@ async def auto_filter(client, msg, spoll=False):
 
         # পাশাপাশি দুইটা বড় বোতাম - Processing & Type in English
         [  
-            InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}"),  
-            InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}")  
+            InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}|{search.strip()}"),  
+            InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}|{search.strip()}")  
         ],
 
         # বড় বোতাম - Close
