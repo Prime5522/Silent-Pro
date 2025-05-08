@@ -743,39 +743,73 @@ async def advantage_spoll_choker(bot, query):
                 await asyncio.sleep(30)
                 await k.delete()
                 
+from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import re
+
 @Client.on_callback_query(filters.regex(r"action_(\w+)_(\d+)\|(.+)"))
 async def handle_actions(client, callback_query):
     action, user_id, search = re.match(r"action_(\w+)_(\d+)\|(.+)", callback_query.data).groups()
     user_id = int(user_id)
 
     try:
-        user_mention = f"<b>👤 Hey!</b>"
+        user = await client.get_users(user_id)
+        search_encoded = search.replace(" ", "+")
+        user_mention = f"<b>👤 Hey {user.first_name}!</b>"
         search_line = f"🔍 You searched for: <code>{search}</code>\n\n"
 
         if action == "uploaded":
             message_text = "✅ <b>Your requested content is now available.</b>\nPlease check the channel."
+            final_msg = f"{user_mention}\n{search_line}{message_text}"
+            await client.send_message(user_id, final_msg)
+
         elif action == "spellcheck":
             message_text = "❌ <b>There seems to be a spelling mistake in your request.</b>\nPlease check on Google and try again."
+            keyboard = InlineKeyboardMarkup(
+                [[InlineKeyboardButton("✏️ Check Spelling on Google 🔍", url=f"https://www.google.com/search?q={search_encoded}")]]
+            )
+            await client.send_photo(
+                chat_id=user_id,
+                photo="https://i.postimg.cc/8CLst5d5/IMG-20250508-153346-518.jpg",  # লোকাল ফাইল বা URL
+                caption=f"{user_mention}\n{search_line}{message_text}",
+                reply_markup=keyboard
+            )
+
         elif action == "notreleased":
             message_text = "⏳ <b>The content you requested has not been released yet.</b>"
+            keyboard = InlineKeyboardMarkup(
+                [[InlineKeyboardButton("🗓️ Check Release Date 🔍", url=f"https://www.google.com/search?q={search_encoded}+release+date")]]
+            )
+            await client.send_photo(
+                chat_id=user_id,
+                photo="https://i.postimg.cc/Gppz0W2v/IMG-20250508-153539-360.jpg",  # লোকাল ফাইল বা URL
+                caption=f"{user_mention}\n{search_line}{message_text}",
+                reply_markup=keyboard
+            )
+
         elif action == "processing":
             message_text = "🛠️ <b>Your request is currently being processed.</b>\nWe’ll notify you once it’s available."
+            final_msg = f"{user_mention}\n{search_line}{message_text}"
+            await client.send_message(user_id, final_msg)
+
         elif action == "typeinenglish":
             message_text = (
                 "✍️ <b>Please try typing the movie name in English.</b>\n"
                 "Just write the name of the movie or web series in English, and it will come up automatically."
             )
+            final_msg = f"{user_mention}\n{search_line}{message_text}"
+            await client.send_message(user_id, final_msg)
+
         else:
             message_text = "⚠️ Invalid action."
+            final_msg = f"{user_mention}\n{search_line}{message_text}"
+            await client.send_message(user_id, final_msg)
 
-        final_msg = f"{user_mention}\n{search_line}{message_text}"
-
-        await client.send_message(user_id, final_msg)
         await callback_query.answer("✅ Message sent to the user.", show_alert=True)
 
     except Exception:
         await callback_query.answer("❗ The user has not started the bot yet!", show_alert=True)
-        
+            
 
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
