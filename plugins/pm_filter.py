@@ -747,10 +747,6 @@ async def advantage_spoll_choker(bot, query):
                 await asyncio.sleep(30)
                 await k.delete()
                 
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-import re
-
 @Client.on_callback_query(filters.regex(r"action_(\w+)_(\d+)\|(.+)"))
 async def handle_actions(client, callback_query):
     action, user_id, search = re.match(r"action_(\w+)_(\d+)\|(.+)", callback_query.data).groups()
@@ -774,7 +770,7 @@ async def handle_actions(client, callback_query):
             )
             await client.send_photo(
                 chat_id=user_id,
-                photo="https://i.postimg.cc/8CLst5d5/IMG-20250508-153346-518.jpg",  # লোকাল ফাইল বা URL
+                photo="https://i.postimg.cc/8CLst5d5/IMG-20250508-153346-518.jpg",
                 caption=f"{user_mention}\n{search_line}{message_text}",
                 reply_markup=keyboard
             )
@@ -786,7 +782,7 @@ async def handle_actions(client, callback_query):
             )
             await client.send_photo(
                 chat_id=user_id,
-                photo="https://i.postimg.cc/Gppz0W2v/IMG-20250508-153539-360.jpg",  # লোকাল ফাইল বা URL
+                photo="https://i.postimg.cc/Gppz0W2v/IMG-20250508-153539-360.jpg",
                 caption=f"{user_mention}\n{search_line}{message_text}",
                 reply_markup=keyboard
             )
@@ -803,6 +799,47 @@ async def handle_actions(client, callback_query):
             )
             final_msg = f"{user_mention}\n{search_line}{message_text}"
             await client.send_message(user_id, final_msg)
+
+        elif action == "notavailable":
+            message_text = (
+                "❌ <b>Requested content is not available at the moment.</b>\n"
+                "It might be removed, or never uploaded. Please double-check the name or try again later."
+            )
+            final_msg = f"{user_mention}\n{search_line}{message_text}"
+            await client.send_message(user_id, final_msg)
+
+        elif action == "contact":
+            message_text = (
+                "📞 <b>Need help?</b>\n"
+                "If you're facing any issue or need assistance, feel free to contact the admin."
+            )
+            admin_username = "YourAdminUsername"  # ⬅️ এখানে আপনার ইউজারনেম দিন
+            await client.send_photo(
+                chat_id=user_id,
+                photo="https://i.postimg.cc/KvNqkx9F/contact-banner.jpg",  # ⬅️ ইচ্ছামত ইমেজ বদলান
+                caption=f"{user_mention}\n{search_line}{message_text}",
+                parse_mode="html",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("💬 Contact Admin", url=f"https://t.me/{admin_username}")]
+                ])
+            )
+
+        elif action == "premium":
+            message_text = (
+                "💎 <b>This content is available for Premium users only.</b>\n"
+                "We have the file you're looking for, but you'll need to upgrade to Premium to access it.\n\n"
+                "Click the button below to learn more and subscribe."
+            )
+            premium_link = "https://t.me/YourPremiumBotOrChannel"  # ⬅️ এখানে আপনার প্রিমিয়াম সাবস্ক্রিপশন লিংক দিন
+            await client.send_photo(
+                chat_id=user_id,
+                photo="https://i.postimg.cc/6q8GyLM3/premium-banner.jpg",  # ⬅️ ইচ্ছেমতো ইমেজ দিন
+                caption=f"{user_mention}\n{search_line}{message_text}",
+                parse_mode="html",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("💎 Get Premium Access", url=premium_link)]
+                ])
+            )
 
         else:
             message_text = "⚠️ Invalid action."
@@ -1788,29 +1825,38 @@ async def auto_filter(client, msg, spoll=False):
     f"#REQUESTED_LOGS\n\n"
     f"**CONTENT NAME:** `{search}`\n"
     f"**USER ID:** tg://openmessage?user_id={message.from_user.id}\n"
-    f"**USER NAME:** {message.from_user.first_name}",  
-    reply_markup=InlineKeyboardMarkup([  
-        # বড় বোতাম - Uploaded Done
-        [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}|{search.strip()}")],
+    f"**USER NAME:** {message.from_user.first_name}", 
+    reply_markup = InlineKeyboardMarkup([
+    # ✅ বড় বোতাম - Uploaded Done
+    [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}|{search.strip()}")],
 
-        # পাশাপাশি দুইটা ছোট বোতাম - Spelling Check & Not Released
-        [  
-            InlineKeyboardButton("❌ Check Spelling", callback_data=f"action_spellcheck_{message.from_user.id}|{search.strip()}"),  
-            InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}|{search.strip()}")  
-        ],
+    # ❌ পাশাপাশি দুইটা ছোট বোতাম - Spelling Check & Not Released
+    [
+        InlineKeyboardButton("❌ Check Spelling", callback_data=f"action_spellcheck_{message.from_user.id}|{search.strip()}"),
+        InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}|{search.strip()}")
+    ],
 
-        # বড় বোতাম - Google Search
-        [InlineKeyboardButton("🔎 Search on Google", url=f"https://www.google.com/search?q={search.replace(' ', '+')}")],  
+    # 🔎 বড় বোতাম - Google Search
+    [InlineKeyboardButton("🔎 Search on Google", url=f"https://www.google.com/search?q={search.replace(' ', '+')}")],
 
-        # পাশাপাশি দুইটা বড় বোতাম - Processing & Type in English
-        [  
-            InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}|{search.strip()}"),  
-            InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}|{search.strip()}")  
-        ],
+    # ⚙️ পাশাপাশি দুইটা বড় বোতাম - Processing & Type in English
+    [
+        InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}|{search.strip()}"),
+        InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}|{search.strip()}")
+    ],
 
-        # বড় বোতাম - Close
-        [InlineKeyboardButton("💥 Close", callback_data="close_data")]  
-    ])  
+    # ❗ পাশাপাশি দুইটা - Not Available & Premium Required
+    [
+        InlineKeyboardButton("🚫 Not Available", callback_data=f"action_notavailable_{message.from_user.id}|{search.strip()}"),
+        InlineKeyboardButton("💎 Premium Required", callback_data=f"action_premium_{message.from_user.id}|{search.strip()}")
+    ],
+
+    # 📞 বড় বোতাম - Contact for Problem
+    [InlineKeyboardButton("📞 Contact for Any Problem", callback_data=f"action_contact_{message.from_user.id}|{search.strip()}")],
+
+    # 💥 বড় বোতাম - Close
+    [InlineKeyboardButton("💥 Close", callback_data="close_data")]
+])
                 )
                 return
     else:
