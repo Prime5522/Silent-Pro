@@ -809,8 +809,7 @@ async def handle_actions(client, callback_query):
             await client.send_message(user_id, final_msg)
 
         elif action == "contact":  
-            message_text = "📞 <b>Need help?</b>\n"
-            "If you're facing any issue or need assistance, feel free to contact the admin"  
+            message_text = "📞 <b>Need help?</b>\nIf you're facing any issue or need assistance, feel free to contact the admin"
             keyboard = InlineKeyboardMarkup(  
                 [[InlineKeyboardButton("💬 Contact Admin", url=f"https://t.me/Prime_Admin_Support_ProBot")]]  
             )  
