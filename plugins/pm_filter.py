@@ -72,6 +72,7 @@ async def give_filter(client, message):
             return await message.reply_text(f"<b>Hᴇʏ {message.from_user.mention},\n\nʏᴏᴜʀ ʀᴇǫᴜᴇꜱᴛ ɪꜱ ᴀʟʀᴇᴀᴅʏ ᴀᴠᴀɪʟᴀʙʟᴇ ✅\n\n📂 ꜰɪʟᴇꜱ ꜰᴏᴜɴᴅ : {str(total_results)}\n🔍 ꜱᴇᴀʀᴄʜ :</b> <code>{search}</code>\n\n<b>‼️ ᴛʜɪs ɪs ᴀ <u>sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ</u> sᴏ ᴛʜᴀᴛ ʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ғɪʟᴇs ғʀᴏᴍ ʜᴇʀᴇ...\n\n📝 ꜱᴇᴀʀᴄʜ ʜᴇʀᴇ : 👇</b>",   
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔍 ᴊᴏɪɴ ᴀɴᴅ ꜱᴇᴀʀᴄʜ ʜᴇʀᴇ 🔎", url=GRP_LNK)]]))
 
+
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
     bot_id = bot.me.id
@@ -80,7 +81,7 @@ async def pm_text(bot, message):
     user_id = message.from_user.id
     if EMOJI_MODE:
         await message.react(emoji=random.choice(REACTIONS), big=True)
-    if content.startswith(("/", "#")):
+    if content.startswith(('/', '#')):
         return  
     try:
         await silentdb.update_top_messages(user_id, content)
@@ -88,9 +89,12 @@ async def pm_text(bot, message):
         if pm_search:
             await auto_filter(bot, message)
         else:
-            await message.reply_text(
-             text=f"<b><i>ɪ ᴀᴍ ɴᴏᴛ ᴡᴏʀᴋɪɴɢ ʜᴇʀᴇ 🚫 ᴊᴏɪɴ ᴍʏ ɢʀᴏᴜᴘ ꜰʀᴏᴍ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴀɴᴅ ꜱᴇᴀʀᴄʜ ᴛʜᴇʀᴇ !</i></b>",   
-             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📝 ꜱᴇᴀʀᴄʜʜᴇʀᴇ ", url=GRP_LNK)]])
+            await message.reply_photo(
+                photo="https://i.postimg.cc/XXMZ8kvs/file-000000001c6861f88a586629fa554677-conversation-id-681d5240-27b8-800e-a7f8-f4268a53fe3c-message-i.png",  # Replace with your image URL or local path
+                caption=f"<b><i>ɪ ᴀᴍ ɴᴏᴛ ᴡᴏʀᴋɪɴɢ ʜᴇʀᴇ Fᴏʀ Sᴏᴍᴇ Rᴇᴀsᴏɴs 🚫 ᴊᴏɪɴ ᴍʏ ɢʀᴏᴜᴘ ꜰʀᴏᴍ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴀɴᴅ ꜱᴇᴀʀᴄʜ ᴛʜᴇʀᴇ !👇</i></b>",
+                reply_markup=InlineKeyboardMarkup(
+                    [[InlineKeyboardButton("📝 ꜱᴇᴀʀᴄʜ ʜᴇʀᴇ ", url=GRP_LNK)]]
+                )
             )
     except Exception as e:
         print(f"An error occurred: {str(e)}")
