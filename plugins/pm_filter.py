@@ -813,10 +813,10 @@ async def handle_actions(client, callback_query):
                 "📞 <b>Need help?</b>\n"
                 "If you're facing any issue or need assistance, feel free to contact the admin."
             )
-            admin_username = "YourAdminUsername"  # ⬅️ এখানে আপনার ইউজারনেম দিন
+            admin_username = "Prime_Admin_Support_ProBot"  # ⬅️ এখানে আপনার ইউজারনেম দিন
             await client.send_photo(
                 chat_id=user_id,
-                photo="https://i.postimg.cc/KvNqkx9F/contact-banner.jpg",  # ⬅️ ইচ্ছামত ইমেজ বদলান
+                photo="https://i.postimg.cc/fyC37H5Y/In-Shot-20250509-130447862.jpg",  # ⬅️ ইচ্ছামত ইমেজ বদলান
                 caption=f"{user_mention}\n{search_line}{message_text}",
                 parse_mode="html",
                 reply_markup=InlineKeyboardMarkup([
@@ -830,14 +830,13 @@ async def handle_actions(client, callback_query):
                 "We have the file you're looking for, but you'll need to upgrade to Premium to access it.\n\n"
                 "Click the button below to learn more and subscribe."
             )
-            premium_link = "https://t.me/YourPremiumBotOrChannel"  # ⬅️ এখানে আপনার প্রিমিয়াম সাবস্ক্রিপশন লিংক দিন
             await client.send_photo(
                 chat_id=user_id,
-                photo="https://i.postimg.cc/6q8GyLM3/premium-banner.jpg",  # ⬅️ ইচ্ছেমতো ইমেজ দিন
+                photo="https://i.postimg.cc/j2v5nZ4m/file-000000007d0461f88bc7fa3cfa687bd4-conversation-id-681d5240-27b8-800e-a7f8-f4268a53fe3c-message-i.png",  # ⬅️ ইচ্ছেমতো ইমেজ দিন
                 caption=f"{user_mention}\n{search_line}{message_text}",
                 parse_mode="html",
                 reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton("💎 Get Premium Access", url=premium_link)]
+                    [InlineKeyboardButton("💎 Get Premium Access", callback_data="premium2")]
                 ])
             )
 
