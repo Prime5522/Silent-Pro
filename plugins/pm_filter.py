@@ -822,9 +822,11 @@ async def handle_actions(client, callback_query):
             )  
 
         elif action == "premium":  
-            message_text = "💎 <b>This content is available for Premium users only.</b>\n"
-                "We have the file you're looking for, but you'll need to upgrade to Premium to access it.\n\n"
-                "Click the button below to learn more and subscribe."
+            message_text = (
+    "💎 <b>This content is available for Premium users only.</b>\n"
+    "We have the file you're looking for, but you'll need to upgrade to Premium to access it.\n\n"
+    "Click the button below to learn more and subscribe."
+            )
             keyboard = InlineKeyboardMarkup(  
                 [[InlineKeyboardButton("💎 Get Premium Access", callback_data="premium2")]]  
             )  
