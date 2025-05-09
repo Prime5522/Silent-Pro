@@ -808,37 +808,32 @@ async def handle_actions(client, callback_query):
             final_msg = f"{user_mention}\n{search_line}{message_text}"
             await client.send_message(user_id, final_msg)
 
-        elif action == "contact":
-            message_text = (
-                "📞 <b>Need help?</b>\n"
-                "If you're facing any issue or need assistance, feel free to contact the admin."
-            )
-            admin_username = "Prime_Admin_Support_ProBot"  # ⬅️ এখানে আপনার ইউজারনেম দিন
-            await client.send_photo(
-                chat_id=user_id,
-                photo="https://i.postimg.cc/fyC37H5Y/In-Shot-20250509-130447862.jpg",  # ⬅️ ইচ্ছামত ইমেজ বদলান
-                caption=f"{user_mention}\n{search_line}{message_text}",
-                parse_mode="html",
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton("💬 Contact Admin", url=f"https://t.me/{admin_username}")]
-                ])
-            )
+        elif action == "contact":  
+            message_text = "📞 <b>Need help?</b>\n"
+            "If you're facing any issue or need assistance, feel free to contact the admin"  
+            keyboard = InlineKeyboardMarkup(  
+                [[InlineKeyboardButton("💬 Contact Admin", url=f"https://t.me/Prime_Admin_Support_ProBot")]]  
+            )  
+            await client.send_photo(  
+                chat_id=user_id,  
+                photo="https://i.postimg.cc/fyC37H5Y/In-Shot-20250509-130447862.jpg",  
+                caption=f"{user_mention}\n{search_line}{message_text}",  
+                reply_markup=keyboard  
+            )  
 
-        elif action == "premium":
-            message_text = (
-                "💎 <b>This content is available for Premium users only.</b>\n"
+        elif action == "premium":  
+            message_text = "💎 <b>This content is available for Premium users only.</b>\n"
                 "We have the file you're looking for, but you'll need to upgrade to Premium to access it.\n\n"
                 "Click the button below to learn more and subscribe."
-            )
-            await client.send_photo(
-                chat_id=user_id,
-                photo="https://i.postimg.cc/j2v5nZ4m/file-000000007d0461f88bc7fa3cfa687bd4-conversation-id-681d5240-27b8-800e-a7f8-f4268a53fe3c-message-i.png",  # ⬅️ ইচ্ছেমতো ইমেজ দিন
-                caption=f"{user_mention}\n{search_line}{message_text}",
-                parse_mode="html",
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton("💎 Get Premium Access", callback_data="premium2")]
-                ])
-            )
+            keyboard = InlineKeyboardMarkup(  
+                [[InlineKeyboardButton("💎 Get Premium Access", callback_data="premium2")]]  
+            )  
+            await client.send_photo(  
+                chat_id=user_id,  
+                photo="https://i.postimg.cc/j2v5nZ4m/file-000000007d0461f88bc7fa3cfa687bd4-conversation-id-681d5240-27b8-800e-a7f8-f4268a53fe3c-message-i.png",  
+                caption=f"{user_mention}\n{search_line}{message_text}",  
+                reply_markup=keyboard  
+            )  
 
         else:
             message_text = "⚠️ Invalid action."
