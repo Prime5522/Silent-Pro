@@ -69,14 +69,14 @@ TUTORIAL_2 = environ.get("TUTORIAL_2", "https://t.me/Prime_Movie_Watch_Dawnload/
 TUTORIAL_3 = environ.get("TUTORIAL_3", "https://t.me/Prime_Movie_Watch_Dawnload/76")
 
 # Verification (Must Fill All Veriables. Else You Got Error
-SHORTENER_API = environ.get("SHORTENER_API", "813ca2ef14fd4fd7586d0b714a65f4c85cecae00")
-SHORTENER_WEBSITE = environ.get("SHORTENER_WEBSITE", "ez4short.com")
+SHORTENER_API = environ.get("SHORTENER_API", "608fbfe60758ecdfcaf5a30f3a076ab2416a3031")
+SHORTENER_WEBSITE = environ.get("SHORTENER_WEBSITE", "droplink.co")
 
-SHORTENER_API2 = environ.get("SHORTENER_API2", "813ca2ef14fd4fd7586d0b714a65f4c85cecae00")
-SHORTENER_WEBSITE2 = environ.get("SHORTENER_WEBSITE2", "ez4short.com")
+SHORTENER_API2 = environ.get("SHORTENER_API2", "608fbfe60758ecdfcaf5a30f3a076ab2416a3031")
+SHORTENER_WEBSITE2 = environ.get("SHORTENER_WEBSITE2", "droplink.co")
 
-SHORTENER_API3 = environ.get("SHORTENER_API3", "813ca2ef14fd4fd7586d0b714a65f4c85cecae00")
-SHORTENER_WEBSITE3 = environ.get("SHORTENER_WEBSITE3", "ez4short.com")
+SHORTENER_API3 = environ.get("SHORTENER_API3", "608fbfe60758ecdfcaf5a30f3a076ab2416a3031")
+SHORTENER_WEBSITE3 = environ.get("SHORTENER_WEBSITE3", "droplink.co")
 
 TWO_VERIFY_GAP = int(environ.get('TWO_VERIFY_GAP', "43200"))
 THREE_VERIFY_GAP = int(environ.get('THREE_VERIFY_GAP', "43200"))
@@ -88,7 +88,7 @@ NO_RESULTS_MSG = bool(environ.get("NO_RESULTS_MSG", True))
 MAX_B_TN = environ.get("MAX_B_TN", "8")
 MAX_BTN = is_enabled((environ.get('MAX_BTN', "True")), True)
 PORT = environ.get("PORT", "8080")
-MSG_ALRT = environ.get('MSG_ALRT', 'Share & Support Us ♥️')
+MSG_ALRT = environ.get('MSG_ALRT', 'Pᴏᴡᴇʀᴇᴅ ʙʏ: @Pʀɪᴍᴇ_Bᴏᴛᴢ ♥️')
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'https://t.me/Prime_Botz_Support') #Support Chat Link
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "False")), False)
 IMDB = is_enabled((environ.get('IMDB', "False")), False)
