@@ -758,11 +758,17 @@ async def handle_actions(client, callback_query):
         user_mention = f"<b>👤 Hey {user.first_name}!</b>"
         search_line = f"🔍 You searched for: <code>{search}</code>\n\n"
 
-        if action == "uploaded":
-            message_text = "✅ <b>Your requested content is now available.</b>\nPlease check the channel."
-            final_msg = f"{user_mention}\n{search_line}{message_text}"
-            await client.send_message(user_id, final_msg)
-
+        elif action == "uploaded":
+            message_text = "✅ <b>Your requested content is now available.</b>\nPlease check the channel."  
+            keyboard = InlineKeyboardMarkup(
+                [[InlineKeyboardButton("Jᴏɪɴ ᴏᴜʀ ᴀʟʟ ᴄʜᴀɴɴᴇʟs ᴀɴᴅ ɢʀᴏᴜᴘs ɪɴ ᴏɴᴇ ᴄʟɪᴄᴋ", url=f"https://t.me/addlist/ceobDOjc7202ZmVl")]]
+            )
+            await client.send_photo(
+                chat_id=user_id,
+                photo="https://i.postimg.cc/fySmH2GT/IMG-20250512-060032-257.jpg",
+                caption=f"{user_mention}\n{search_line}{message_text}",
+                reply_markup=keyboard
+            )
         elif action == "spellcheck":
             message_text = "❌ <b>There seems to be a spelling mistake in your request.</b>\nPlease check on Google and try again."
             keyboard = InlineKeyboardMarkup(
