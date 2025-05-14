@@ -1888,11 +1888,13 @@ async def auto_filter(client, msg, spoll=False):
 
                 # অ্যাডভান্স চেকিং না পেলে, চ্যানেলে পোস্ট করা হবে
                 await client.send_message(  
-    req_channel,  
-    f"#REQUESTED_LOGS\n\n"
-    f"**CONTENT NAME:** `{search}`\n"
-    f"**USER ID:** tg://openmessage?user_id={message.from_user.id}\n"
-    f"**USER NAME:** {message.from_user.first_name}", 
+    req_channel,
+    f"✨ **🚫 ɴᴏ ꜰɪʟᴇ ʀᴇǫᴜᴇsᴛᴇᴅ 🚫** ✨\n\n"
+    f"🎬 **ꜰɪʟᴇ ɴᴀᴍᴇ:** `{search}`\n"
+    f"🆔 **ᴜsᴇʀ ɪᴅ:** [ᴠɪᴇᴡ ᴩʀᴏꜰɪʟᴇ](tg://openmessage?user_id={message.from_user.id})\n"
+    f"👤 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** `{message.from_user.first_name}`\n"
+    f"⏰ **ʀᴇǫᴜᴇsᴛᴇᴅ ᴏɴ:** `{datetime.now().strftime('%d %B %Y, %I:%M %p')}`\n"
+    f"💌 **sᴛᴀᴛᴜs:** ᴩᴇɴᴅɪɴɢ 🔄\n", 
     reply_markup = InlineKeyboardMarkup([
     # ✅ বড় বোতাম - Uploaded Done
     [InlineKeyboardButton("✅ ᴜᴩʟᴏᴀᴅᴇᴅ ᴅᴏɴᴇ ✅", callback_data=f"action_uploaded_{message.from_user.id}|{search.strip()}")],
