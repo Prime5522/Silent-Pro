@@ -408,22 +408,15 @@ Mᴇꜱꜱᴀɢᴇ : <b>{}</b>
     
    # CAPTION = """<b><a href="https://t.me/SilentXBotz">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a https://t.me/SilentXBotz>[SilentXBotz]</a></b>"""
 
-    CAPTION = """
-╭─━━━⌁ 𝘾𝙊𝙉𝙏𝙀𝙉𝙏 𝙄𝙉𝙁𝙊 ⌁━━━─╮
-┃ 📂 <b>𝐅𝐢𝐥𝐞 𝐍𝐚𝐦𝐞 :</b> <code>{file_name}</code>
-┃
-┃ ⚙️ <b>𝐅𝐢𝐥𝐞 𝐒𝐢𝐳𝐞  :</b> <b>{file_size}</b> 
-╰─────────────────────╯
+    CAPTION = """ <b>🗃️ ꜰɪʟᴇ ɴᴀᴍᴇ : <a href='https://t.me/PrimeCineZone'>{file_name}</a></b>
 
-╭─━━━⌁ ᴏꜰꜰɪᴄɪᴀʟ ɴᴇᴛᴡᴏʀᴋ ⌁━━━─╮
-├ ⚡ ᴘᴏᴡᴇʀᴇᴅ ʙʏ : <a href='https://t.me/Prime_Botz'>ᴘʀɪᴍᴇ ʙᴏᴛᴢ</a>
-├ 🎥 ᴇxᴘʟᴏʀᴇ ᴍᴏʀᴇ : <a href='https://t.me/PrimeCineZone'>ᴘʀɪᴍᴇ ᴄɪɴᴇ ᴢᴏɴᴇ</a>
-└ 🔗 ᴊᴏɪɴ ᴀʟʟ ᴄʜᴀɴɴᴇʟꜱ : <a href='https://t.me/addlist/ceobDOjc7202ZmVl'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴊᴏɪɴ</a>
-╰─────────────────────╯
+╭─────────────⍟
+├📦 ꜰɪʟᴇ sɪᴢᴇ : {file_size} 
+╰─────────────⍟
 
-╭─━━━━⌁ ᴇɴɢᴀɢᴇ ᴡɪᴛʜ ᴘᴏꜱᴛ ⌁━━━━━─╮
-┃ ♡ 𝐋𝐢𝐤𝐞     ❍ 𝐂𝐨𝐦𝐦𝐞𝐧𝐭  ⎙ 𝐒𝐚𝐯𝐞  ⌲ 𝐒𝐡𝐚𝐫𝐞    
-╰━━━━━━━━━━━━━━━━━━━━━━━━╯
+<blockquote>╭─━━━━⌁ ᴇɴɢᴀɢᴇ ᴡɪᴛʜ ᴘᴏꜱᴛ ⌁━━━━━─╮
+├⚜️ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➠ <a href='https://t.me/addlist/ceobDOjc7202ZmVl'>ᴩʀɪᴍᴇ ʙᴏᴛᴢ</a>
+╰━━━━━━━━━━━━━━━━━━━━━━━━━━━╯</blockquote>
 """
     
     IMDB_TEMPLATE_TXT = """
