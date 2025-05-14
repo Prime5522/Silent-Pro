@@ -91,7 +91,7 @@ async def pm_text(bot, message):
         else:
             await message.reply_photo(
                 photo="https://i.postimg.cc/XXMZ8kvs/file-000000001c6861f88a586629fa554677-conversation-id-681d5240-27b8-800e-a7f8-f4268a53fe3c-message-i.png",  # Replace with your image URL or local path
-                caption=f"<b><i>ɪ ᴀᴍ ɴᴏᴛ ᴡᴏʀᴋɪɴɢ ʜᴇʀᴇ Fᴏʀ Sᴏᴍᴇ Rᴇᴀsᴏɴs 🚫 ᴊᴏɪɴ ᴍʏ ɢʀᴏᴜᴘ ꜰʀᴏᴍ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴀɴᴅ ꜱᴇᴀʀᴄʜ ᴛʜᴇʀᴇ !👇</i></b>",
+                caption=f"<b><i>ɪ ᴀᴍ ɴᴏᴛ ᴡᴏʀᴋɪɴɢ ʜᴇʀᴇ ꜰᴏʀ sᴏᴍᴇ ʀᴇᴀsᴏɴs 🚫 ᴊᴏɪɴ ᴍʏ ɢʀᴏᴜᴘ ꜰʀᴏᴍ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴀɴᴅ ꜱᴇᴀʀᴄʜ ᴛʜᴇʀᴇ !👇</i></b>",
                 reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("📝 ꜱᴇᴀʀᴄʜ ʜᴇʀᴇ ", url=GRP_LNK)]]
                 )
@@ -1895,34 +1895,30 @@ async def auto_filter(client, msg, spoll=False):
     f"**USER NAME:** {message.from_user.first_name}", 
     reply_markup = InlineKeyboardMarkup([
     # ✅ বড় বোতাম - Uploaded Done
-    [InlineKeyboardButton("✅ Uploaded Done", callback_data=f"action_uploaded_{message.from_user.id}|{search.strip()}")],
+    [InlineKeyboardButton("✅ ᴜᴩʟᴏᴀᴅᴇᴅ ᴅᴏɴᴇ ✅", callback_data=f"action_uploaded_{message.from_user.id}|{search.strip()}")],
 
     # ❌ পাশাপাশি দুইটা ছোট বোতাম - Spelling Check & Not Released
     [
-        InlineKeyboardButton("❌ Check Spelling", callback_data=f"action_spellcheck_{message.from_user.id}|{search.strip()}"),
-        InlineKeyboardButton("⏳ Not Released Yet", callback_data=f"action_notreleased_{message.from_user.id}|{search.strip()}")
+        InlineKeyboardButton("❌ ᴄʜᴇᴄᴋ sᴩᴇʟʟɪɴɢ", callback_data=f"action_spellcheck_{message.from_user.id}|{search.strip()}"),
+        InlineKeyboardButton("⏳ ɴᴏᴛ ʀᴇʟᴇᴀsᴇᴅ ʏᴇᴛ", callback_data=f"action_notreleased_{message.from_user.id}|{search.strip()}")
     ],
 
     # 🔎 বড় বোতাম - Google Search
-    [InlineKeyboardButton("🔎 Search on Google", url=f"https://www.google.com/search?q={search.replace(' ', '+')}")],
-
+    [InlineKeyboardButton("🔎 sᴇᴀʀᴄʜ ᴀɴᴅ ᴄʜᴇᴄᴋ ᴏɴ ɢᴏᴏɢʟᴇ 🔍", url=f"https://www.google.com/search?q={search.replace(' ', '+')}")],
     # ⚙️ পাশাপাশি দুইটা বড় বোতাম - Processing & Type in English
     [
-        InlineKeyboardButton("🛠️ Under Processing", callback_data=f"action_processing_{message.from_user.id}|{search.strip()}"),
-        InlineKeyboardButton("🔤 Type in English", callback_data=f"action_typeinenglish_{message.from_user.id}|{search.strip()}")
+        InlineKeyboardButton("🛠️ ᴜɴᴅᴇʀ ᴩʀᴏᴄᴇssɪɴɢ", callback_data=f"action_processing_{message.from_user.id}|{search.strip()}"),
+        InlineKeyboardButton("🔤 ᴛʏᴩᴇ ɪɴ ᴇɴɢʟɪsʜ", callback_data=f"action_typeinenglish_{message.from_user.id}|{search.strip()}")
     ],
-
+    # 📞 বড় বোতাম - Contact for Problem
+    [InlineKeyboardButton("📞 ᴄᴏɴᴛᴀᴄᴛ ꜰᴏʀ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ 💬", callback_data=f"action_contact_{message.from_user.id}|{search.strip()}")],        
     # ❗ পাশাপাশি দুইটা - Not Available & Premium Required
     [
-        InlineKeyboardButton("🚫 Not Available", callback_data=f"action_notavailable_{message.from_user.id}|{search.strip()}"),
-        InlineKeyboardButton("💎 Premium Required", callback_data=f"action_premium_{message.from_user.id}|{search.strip()}")
+        InlineKeyboardButton("🚫 ɴᴏᴛ ᴀᴠᴀɪʟᴀʙʟᴇ", callback_data=f"action_notavailable_{message.from_user.id}|{search.strip()}"),
+        InlineKeyboardButton("💎 ᴩʀᴇᴍɪᴜᴍ ʀᴇǫᴜɪʀᴇᴅ", callback_data=f"action_premium_{message.from_user.id}|{search.strip()}")
     ],
-
-    # 📞 বড় বোতাম - Contact for Problem
-    [InlineKeyboardButton("📞 Contact for Any Problem", callback_data=f"action_contact_{message.from_user.id}|{search.strip()}")],
-
     # 💥 বড় বোতাম - Close
-    [InlineKeyboardButton("💥 Close", callback_data="close_data")]
+    [InlineKeyboardButton("💥 ᴄʟᴏsᴇ 💥", callback_data="close_data")]
 ])
                 )
                 return
