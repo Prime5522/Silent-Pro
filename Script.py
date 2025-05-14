@@ -416,7 +416,7 @@ Mᴇꜱꜱᴀɢᴇ : <b>{}</b>
 
 <blockquote>╭─━━━━⌁ ᴇɴɢᴀɢᴇ ᴡɪᴛʜ ᴘᴏꜱᴛ ⌁━━━━━─╮
 ├⚜️ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➠ <a href='https://t.me/addlist/ceobDOjc7202ZmVl'>ᴩʀɪᴍᴇ ʙᴏᴛᴢ</a>
-╰━━━━━━━━━━━━━━━━━━━━━━━━━━━╯</blockquote>
+╰━━━━━━━━━━━━━━━━━━━━━━━━━╯</blockquote>
 """
     
     IMDB_TEMPLATE_TXT = """
