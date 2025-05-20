@@ -174,18 +174,19 @@ async def start(client, message):
 
     try:
         settings = await get_settings(int(data.split("_", 2)[1]))
-        main_channel = int(settings.get('fsub_id', AUTH_CHANNEL))
+        fsub_channel = int(settings.get("fsub_id", AUTH_CHANNEL))
         btn = []
 
-        # ✅ চ্যানেল 1 - Main Channel (fsub_id)
-        if not await is_subscribed(client, message.from_user.id, main_channel):
-            try:
-                invite_main = await client.create_chat_invite_link(main_channel, creates_join_request=True)
-                btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 1 ⛔️", url=invite_main.invite_link)])
-            except ChatAdminRequired:
-                logger.error("Make sure Bot is admin in Main Channel (fsub_id)")
-                return
-
+        # ✅ প্রথম চেক: AUTH_REQ_CHANNEL হলে রিকুয়েস্ট টু জয়েন
+        if fsub_channel == AUTH_REQ_CHANNEL:
+            if AUTH_REQ_CHANNEL and not await is_req_subscribed(client, message):
+                try:
+                    invite = await client.create_chat_invite_link(AUTH_REQ_CHANNEL, creates_join_request=True)
+                    btn.append([InlineKeyboardButton("⛔️ ʀᴇQᴜᴇsᴛ ᴛᴏ ᴊᴏɪɴ ⛔️", url=invite.invite_link)])
+                except ChatAdminRequired:
+                    logger.error("Make sure Bot is admin in AUTH_REQ_CHANNEL")
+                    return
+    
         # ✅ চ্যানেল 2 - EXTRA_CHANNEL
         if not await is_subscribed(client, message.from_user.id, EXTRA_CHANNEL):
             try:
