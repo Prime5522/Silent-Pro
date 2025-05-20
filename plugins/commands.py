@@ -180,7 +180,7 @@ async def start(client, message):
         # ✅ চ্যানেল 1 - Main Channel (fsub_id)
         if not await is_subscribed(client, message.from_user.id, main_channel):
             try:
-                invite_main = await client.create_chat_invite_link(main_channel)
+                invite_main = await client.create_chat_invite_link(main_channel, creates_join_request=True)
                 btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 1 ⛔️", url=invite_main.invite_link)])
             except ChatAdminRequired:
                 logger.error("Make sure Bot is admin in Main Channel (fsub_id)")
