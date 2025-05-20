@@ -28,6 +28,7 @@ TIMEZONE = "Asia/Kolkata"
 BATCH_FILES = {}
 
 EXTRA_CHANNEL = -1002043502363
+EXTRA_CHANNELP = -1002245813234
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
@@ -176,7 +177,7 @@ async def start(client, message):
         main_channel = int(settings.get('fsub_id', AUTH_CHANNEL))
         btn = []
 
-        # চ্যানেল 1 - Main Channel from settings
+        # ✅ চ্যানেল 1 - Main Channel (fsub_id)
         if not await is_subscribed(client, message.from_user.id, main_channel):
             try:
                 invite_main = await client.create_chat_invite_link(main_channel)
@@ -185,7 +186,7 @@ async def start(client, message):
                 logger.error("Make sure Bot is admin in Main Channel (fsub_id)")
                 return
 
-        # চ্যানেল 2 - Extra Channel
+        # ✅ চ্যানেল 2 - EXTRA_CHANNEL
         if not await is_subscribed(client, message.from_user.id, EXTRA_CHANNEL):
             try:
                 invite_extra = await client.create_chat_invite_link(EXTRA_CHANNEL)
@@ -194,10 +195,20 @@ async def start(client, message):
                 logger.error("Make sure Bot is admin in EXTRA_CHANNEL")
                 return
 
-        # Retry Button
+        # ✅ চ্যানেল 3 - EXTRA_CHANNELP
+        if not await is_subscribed(client, message.from_user.id, EXTRA_CHANNELP):
+            try:
+                invite_extra_p = await client.create_chat_invite_link(EXTRA_CHANNELP)
+                btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 3 ⛔️", url=invite_extra_p.invite_link)])
+            except ChatAdminRequired:
+                logger.error("Make sure Bot is admin in EXTRA_CHANNELP")
+                return
+
+        # ✅ Retry বাটন
         if btn and message.command[1] != "subscribe":
             btn.append([InlineKeyboardButton("♻️ ᴛʀʏ ᴀɢᴀɪɴ ♻️", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
 
+        # ✅ যদি কোনো চ্যানেলে Join না থাকে, তাহলে ফোর্স সাবস্ক্রিপশন পাঠাবে
         if btn:
             await client.send_photo(
                 chat_id=message.from_user.id,
@@ -212,7 +223,7 @@ async def start(client, message):
     except Exception as e:
         await log_error(client, f"Got Error In Force Subscription Function.\n\n Error - {e}")
         print(f"Error In Fsub :- {e}")
-
+        
     user_id = message.from_user.id
     if not await db.has_premium_access(user_id):
         try:
