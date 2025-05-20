@@ -66,43 +66,15 @@ async def is_req_subscribed(bot, query):
             return True
     return False
 
-#async def is_subscribed(bot, user_id, channel_id):
-  #  try:
-      #  user = await bot.get_chat_member(channel_id, user_id)
- #   except UserNotParticipant:
-    #    pass
-  #  except Exception as e:
-   #     pass
-  #  else:
-      #  if user.status != enums.ChatMemberStatus.BANNED:
-          #  return True
-  #  return False
-
 async def is_subscribed(bot, user_id, channel_id):
     try:
         user = await bot.get_chat_member(channel_id, user_id)
     except UserNotParticipant:
-        return False
+        pass
     except Exception as e:
-        print(f"Error checking subscription: {e}")
-        return False
+        pass
     else:
-        # ✅ যদি BAN না থাকে এবং pending না থাকে, তাহলে True
-        if user.status in [
-            enums.ChatMemberStatus.MEMBER,
-            enums.ChatMemberStatus.OWNER,
-            enums.ChatMemberStatus.ADMINISTRATOR,
-            enums.ChatMemberStatus.RESTRICTED
-        ]:
-            return True
-        # ✅ যদি Request to Join করা থাকে (pending), তাহলে এটাকেও True ধরা হবে
-        if user.status == enums.ChatMemberStatus.RESTRICTED and getattr(user, "is_member", False):
-            return True
-        if user.status == enums.ChatMemberStatus.LEFT:
-            return False
-        if user.status == enums.ChatMemberStatus.BANNED:
-            return False
-        if user.status == "pending":
+        if user.status != enums.ChatMemberStatus.BANNED:
             return True
     return False
     
