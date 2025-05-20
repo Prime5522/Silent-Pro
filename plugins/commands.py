@@ -206,7 +206,7 @@ async def start(client, message):
 
         # ✅ Retry বাটন
         if btn and message.command[1] != "subscribe":
-            btn.append([InlineKeyboardButton("♻️ ᴛʀʏ ᴀɢᴀɪɴ ♻️", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+            btn.append([InlineKeyboardButton("🔄 ʀᴇғʀᴇsʜ ♻️", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
 
         # ✅ যদি কোনো চ্যানেলে Join না থাকে, তাহলে ফোর্স সাবস্ক্রিপশন পাঠাবে
         if btn:
