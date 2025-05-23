@@ -35,7 +35,30 @@ async def gen_link_s(bot, message):
     string += file_id
     outstr = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
     await message.reply(f"Here is your Link:\nhttps://t.me/{temp.U_NAME}?start={outstr}")
-    
+
+
+@Client.on_message(filters.command(["primeurl", "primelink"]))
+async def gen_direct_link(bot, message):
+    replied = message.reply_to_message
+    if not replied:
+        return await message.reply("Reply to a media file to get a direct access link.")
+
+    if not replied.media:
+        return await message.reply("Only media files (video, document, audio) are supported.")
+
+    try:
+        # Forward the file to LOG_CHANNEL or your bot's private channel
+        sent = await bot.copy_message(
+            chat_id=LOG_CHANNEL,
+            from_chat_id=message.chat.id,
+            message_id=replied.id
+        )
+    except Exception as e:
+        return await message.reply(f"Failed to copy file: {e}")
+
+    # Generate direct link using message_id
+    file_link = f"https://t.me/{temp.U_NAME}/{sent.id}"
+    await message.reply(f"Here is your direct link (No token verification required):\n{file_link}")
     
 @Client.on_message(filters.command(['batch', 'pbatch']) & filters.create(allowed))
 async def gen_link_batch(bot, message):
