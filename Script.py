@@ -375,6 +375,8 @@ Nᴀᴍᴇ - {}
  ❏ 370₹/৳    ➠    𝟷𝟸 ᴍᴏɴᴛʜs \n 
  ╰━━━━━━━━━━━━━━━╯
 
+💰 ᴜᴘɪ ɪᴅ: `6296899873@axl`
+
 💵 𝗔𝗡𝗬 𝗖𝗢𝗨𝗡𝗧𝗥𝗬 𝗔𝗟𝗟 𝗣𝗔𝗬𝗠𝗘𝗡𝗧 𝗠𝗘𝗧𝗛𝗢𝗗 𝗔𝗩𝗔𝗜𝗟𝗔𝗕𝗟𝗘. যদি বিকাশ বা 𝗤𝗥 কোড ছাড়া অথবা অন্য কিছু মাধ্যমে\n পেমেন্ট করতে চাইলে অথবা আরো কিছু জানার থাকলে\n𝗖𝗢𝗡𝗡𝗘𝗖𝗧 𝗔𝗗𝗠𝗜𝗡 ➠ <a href='https://t.me/Prime_Admin_Support_ProBot'>𝐌𝐑.𝐏𝐑𝐈𝐌𝐄</a> 
  
 ⛽️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ: /myplan
@@ -420,14 +422,14 @@ Mᴇꜱꜱᴀɢᴇ : <b>{}</b>
     
    # CAPTION = """<b><a href="https://t.me/SilentXBotz">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a https://t.me/SilentXBotz>[SilentXBotz]</a></b>"""
 
-    CAPTION = """ <b>🗃️ ꜰɪʟᴇ ɴᴀᴍᴇ : <a href='https://t.me/PrimeCineZone'>{file_name}</a></b>
+    CAPTION = """ <b>🗃️ ꜰɪʟᴇ ɴᴀᴍᴇ : @PrimeCineHub <a href='https://t.me/PrimeCineZone'>{file_name}</a></b>
 
 ╭─────────────⍟
 ├📦 ꜰɪʟᴇ sɪᴢᴇ : {file_size} 
 ╰─────────────⍟
 
 <blockquote>╭─━━━━⌁ ᴇɴɢᴀɢᴇ ᴡɪᴛʜ ᴘᴏꜱᴛ ⌁━━━━━─╮
-├⚜️ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➠ <a href='https://t.me/addlist/ceobDOjc7202ZmVl'>ᴩʀɪᴍᴇ ʙᴏᴛᴢ</a>
+├⚜️ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➠ <a href='https://t.me/addlist/ceobDOjc7202ZmVl'>ᴩʀɪᴍᴇ ʙᴏᴛᴢ & ᴘʀɪᴍᴇ ᴄɪɴᴇᴢᴏɴᴇ 🍿</a>
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━╯</blockquote>
 """
     
