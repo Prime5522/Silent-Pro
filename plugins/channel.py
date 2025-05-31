@@ -41,6 +41,13 @@ async def send_movie_update(bot, file_name, caption):
         file_name = await movie_name_format(file_name)
         caption = await movie_name_format(caption)
 
+        # Clean file_name (remove URL, @mention, extra spaces)
+        clean_name = re.sub(r'https?://\S+', '', file_name)
+        clean_name = re.sub(r'@\w+', '', clean_name)
+        clean_name = re.sub(r'\s{2,}', ' ', clean_name).strip()
+
+        title_line = f"🗃️ @PrimeCineHub {clean_name}"
+
         year_match = re.search(r"\b(19|20)\d{2}\b", caption)
         year = year_match.group(0) if year_match else None
 
@@ -68,11 +75,12 @@ async def send_movie_update(bot, file_name, caption):
         reaction_counts[unique_id] = {"❤️": 0, "👍": 0, "👎": 0, "🔥": 0}
         user_reactions[unique_id] = {}
 
-        # Caption template
-        caption_template = """
+        # Caption template (title_line যুক্ত করা হয়েছে এখানে)
+        caption_template = f"""{title_line}
+
 ╔════❰ #ɴᴇᴡ_ꜰɪʟᴇ_ᴀᴅᴅᴇᴅ ✅ ❱═❍⊱❁۪۪
 ║╭━━━❰ 🎬 ꜰᴏʀ ʏᴏᴜʀ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ 🎭 ❱━⊱
-║┃🎬 ᴛɪᴛʟᴇ : {title}
+║┃🎬 ᴛɪᴛʟᴇ : {file_name}
 ║┃🎥 Qᴜᴀʟɪᴛʏ : {quality}
 ║┃🔊 ʟᴀɴɢᴜᴀɢᴇ : {language}
 ║┃🗒️ ʀᴇʟᴇᴀsᴇ : {year}
@@ -106,13 +114,8 @@ async def send_movie_update(bot, file_name, caption):
 ╚══❰ 💠 ꜱᴛᴀʏ ᴇɴᴛᴇʀᴛᴀɪɴᴇᴅ 💠 ❱═❍⊱❁۪۪
 """
 
-        full_caption = caption_template.format(
-            title=file_name,
-            quality=quality,
-            language=language,
-            year=year,
-            search_movie=search_movie
-        )
+        full_caption = caption_template
+
 
         buttons = [[
             InlineKeyboardButton(f"❤️ {reaction_counts[unique_id]['❤️']}", callback_data=f"r{unique_id}{search_movie}heart"),
