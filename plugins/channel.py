@@ -41,9 +41,10 @@ async def send_movie_update(bot, file_name, caption):
         file_name = await movie_name_format(file_name)
         caption = await movie_name_format(caption)
 
-        # Clean file_name (remove URL, @mention, extra spaces)
+        # Clean file_name (remove URL, @mention, quality like 720p, and extra spaces)
         clean_name = re.sub(r'https?://\S+', '', file_name)
         clean_name = re.sub(r'@\w+', '', clean_name)
+        clean_name = re.sub(r'\b(?:480|720|1080)[pP]\b', '', clean_name)
         clean_name = re.sub(r'\s{2,}', ' ', clean_name).strip()
 
         title_line = f"🗃️ @PrimeCineHub {clean_name}"
@@ -78,40 +79,34 @@ async def send_movie_update(bot, file_name, caption):
         # Caption template (title_line যুক্ত করা হয়েছে এখানে)
         caption_template = f"""{title_line}
 
-╔════❰ #ɴᴇᴡ_ꜰɪʟᴇ_ᴀᴅᴅᴇᴅ ✅ ❱═❍⊱❁۪۪
-║╭━━━❰ 🎬 ꜰᴏʀ ʏᴏᴜʀ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ 🎭 ❱━⊱
-║┃🎬 ᴛɪᴛʟᴇ : {file_name}
-║┃🎥 Qᴜᴀʟɪᴛʏ : {quality}
-║┃🔊 ʟᴀɴɢᴜᴀɢᴇ : {language}
-║┃🗒️ ʀᴇʟᴇᴀsᴇ : {year}
-║╰━━━━━━━━━━━━━━━━━━⊱
-║
-║╭━━━━❰ 📺 ᴠɪᴅᴇᴏ ǫᴜᴀʟɪᴛʏ 📺 ❱━━⊱
-║┃
-║┣⪼⭕ 𝟰𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.com-{title}-480p-{quality}.mkv</a>
-║┃
-║┣⪼⭕ 𝟳𝟮𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.com-{title}-720p-{quality}.mkv</a>
-║┃
-║┣⪼⭕ 𝟭𝟬𝟴𝟬𝗽 👉 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Primeurl.com-{title}-1080p-{quality}.mkv</a>
-║┃
-║╰━━━━━━━━━━━━━━━━━━⊱
-║
-║╭━❰ 📚 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴛᴜᴛᴏʀɪᴀʟ ᴠɪᴅᴇᴏ 🎥 ❱━⊱
-║┃        <a href='https://t.me/Prime_Movie_Watch_Dawnload/75'>👉 🔴 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ 🔴 👈</a>
-║╰━━━━━━━━━━━━━━━━⊱
-║
-║╭━━━━❰ 🤝 ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟꜱ & ɢʀᴏᴜᴘꜱ 🤝 ❱━⊱
-║┃
-║┣⪼ ✇ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟꜱ:
-║┃🔹 @PrimeCineZone
-║┃🔹 @Prime_Botz
-║┃
-║┣⪼ 🎬 ᴍᴏᴠɪᴇ/ᴡᴇʙ ꜱᴇʀɪᴇꜱ ʀᴇQᴜᴇꜱᴛ ɢʀᴏᴜᴘ:
-║┃🔗 https://t.me/PrimeCineZone/143
-║┃
-║╰━━━━━━━━━━━━━━⊱
-║
-╚══❰ 💠 ꜱᴛᴀʏ ᴇɴᴛᴇʀᴛᴀɪɴᴇᴅ 💠 ❱═❍⊱❁۪۪
+⊰•─•─✦✗✦─•◈•─✦✗✦─•─•⊱
+📥 ᴛᴇʟᴇɢʀᴀᴍ ᴅɪʀᴇᴄᴛ ᴅᴏᴡɴʟᴏᴀᴅ ғɪʟᴇ 📥
+⊰━━❰ 📺 ᴠɪᴅᴇᴏ ǫᴜᴀʟɪᴛʏ 📺 ❱━━⊱
+
+📁 480ᴘ
+🔗 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Prime.com-{title}-480p-{quality}.mkv</a>
+
+📁 720ᴘ
+🔗 <a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Prime.com-{title}-720p-{quality}.mkv</a>
+
+📁 1080ᴘ
+🔗<a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Prime.com-{title}-1080p-{quality}.mkv</a>
+
+
+╭━❰ 📚 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴛᴜᴛᴏʀɪᴀʟ ᴠɪᴅᴇᴏ 🎥 ❱━⊱
+┃        <a href='https://t.me/Prime_Movie_Watch_Dawnload/75'>📥 𝗪𝗔𝗧𝗖𝗛 𝗧𝗨𝗧𝗢𝗥𝗜𝗔𝗟 𝗡𝗢𝗪 ▶️</a>
+╰━━━━━━━━━━━━━━━━⊱
+💬 ᴊᴏɪɴ ᴏᴜʀ ᴀʟʟ ᴄʜᴀɴɴᴇʟ & ɢʀᴏᴜᴘꜱ  
+🔗✇ https://t.me/addlist/ceobDOjc7202ZmVl
+
+⊰•─•─✦✗✦─•◈•─✦✗✦─•─•⊱
+📡 ᴏғғɪᴄɪᴀʟ ʙᴀᴄᴋᴜᴘ ᴄʜᴀɴɴᴇʟ 🔹  
+🔗 <a href="https://t.me/PrimeCineZone">Pʀɪᴍᴇ CɪɴᴇZᴏɴᴇ (ᴏꜰꜰɪᴄɪᴀʟ)</a>
+⊰━━━━━━━━━━━━━━━━━━━⊱
+🔔 ꜱᴛᴀʏ ᴛᴜɴᴇᴅ ꜰᴏʀ ᴍᴏʀᴇ ᴜᴘᴅᴀᴛᴇꜱ  
+📽️ ɴᴇᴡ ᴍᴏᴠɪᴇꜱ, ꜱᴇʀɪᴇꜱ & ᴍᴏʀᴇ ᴇᴠᴇʀʏ ᴅᴀʏ!  
+📩 ᴡᴇ'ʀᴇ ʜᴇʀᴇ ᴛᴏ ᴅᴇʟɪᴠᴇʀ ᴛʜᴇ ʙᴇꜱᴛ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ!
+⊰━━━━━━━━━━━━━━━━━━━⊱
 """
 
         full_caption = caption_template
@@ -137,7 +132,6 @@ async def send_movie_update(bot, file_name, caption):
 
     except Exception as e:
         print(f"Error in send_movie_update: {e}")
-        
         
 
 @Client.on_callback_query(filters.regex(r"^r_"))
