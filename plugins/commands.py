@@ -181,8 +181,9 @@ async def start(client, message):
         if fsub_channel == AUTH_REQ_CHANNEL:
             if AUTH_REQ_CHANNEL and not await is_req_subscribed(client, message):
                 try:
+                    chat_info = await client.get_chat(AUTH_REQ_CHANNEL)
                     invite = await client.create_chat_invite_link(AUTH_REQ_CHANNEL, creates_join_request=True)
-                    btn.append([InlineKeyboardButton("⛔️ ʀᴇQᴜᴇsᴛ ᴛᴏ ᴊᴏɪɴ ⛔️", url=invite.invite_link)])
+                    btn.append([InlineKeyboardButton(f"✇ ᴊᴏɪɴ {chat_info.title} ✇", url=invite.invite_link)])
                 except ChatAdminRequired:
                     logger.error("Make sure Bot is admin in AUTH_REQ_CHANNEL")
                     return
@@ -190,8 +191,9 @@ async def start(client, message):
         # ✅ চ্যানেল 2 - EXTRA_CHANNEL
         if not await is_subscribed(client, message.from_user.id, EXTRA_CHANNEL):
             try:
+                chat_extra = await client.get_chat(EXTRA_CHANNEL)
                 invite_extra = await client.create_chat_invite_link(EXTRA_CHANNEL)
-                btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 2 ⛔️", url=invite_extra.invite_link)])
+                btn.append([InlineKeyboardButton(f"✇ ᴊᴏɪɴ {chat_extra.title} ✇", url=invite_extra.invite_link)])
             except ChatAdminRequired:
                 logger.error("Make sure Bot is admin in EXTRA_CHANNEL")
                 return
@@ -199,8 +201,9 @@ async def start(client, message):
         # ✅ চ্যানেল 3 - EXTRA_CHANNELP
         if not await is_subscribed(client, message.from_user.id, EXTRA_CHANNELP):
             try:
+                chat_extra_p = await client.get_chat(EXTRA_CHANNELP)
                 invite_extra_p = await client.create_chat_invite_link(EXTRA_CHANNELP)
-                btn.append([InlineKeyboardButton("⛔️ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 3 ⛔️", url=invite_extra_p.invite_link)])
+                btn.append([InlineKeyboardButton(f"✇ ᴊᴏɪɴ {chat_extra_p.title} ✇", url=invite_extra_p.invite_link)])
             except ChatAdminRequired:
                 logger.error("Make sure Bot is admin in EXTRA_CHANNELP")
                 return
