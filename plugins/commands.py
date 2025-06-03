@@ -29,6 +29,7 @@ BATCH_FILES = {}
 
 EXTRA_CHANNEL = -1002043502363
 EXTRA_CHANNELP = -1002245813234
+EXTRA_CHANNELQ = -1002323796637
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
@@ -206,6 +207,15 @@ async def start(client, message):
                 btn.append([InlineKeyboardButton(f"✇ ᴊᴏɪɴ {chat_extra_p.title} ✇", url=invite_extra_p.invite_link)])
             except ChatAdminRequired:
                 logger.error("Make sure Bot is admin in EXTRA_CHANNELP")
+                return
+
+        if not await is_subscribed(client, message.from_user.id, EXTRA_CHANNELQ):
+            try:
+                chat_extra_q = await client.get_chat(EXTRA_CHANNELQ)
+                invite_extra_q = await client.create_chat_invite_link(EXTRA_CHANNELQ)
+                btn.append([InlineKeyboardButton(f"✇ ᴊᴏɪɴ {chat_extra_q.title} ✇", url=invite_extra_q.invite_link)])
+            except ChatAdminRequired:
+                logger.error("Make sure Bot is admin in EXTRA_CHANNELQ")
                 return
 
         # ✅ Retry বাটন
