@@ -93,15 +93,15 @@ async def send_movie_update(bot, file_name, caption):
 🔗<a href="https://telegram.me/iPapkornPrimeBot?start=getfile-{search_movie}">https://Prime.com-{title}-1080p-{quality}.mkv</a>
 
 
-╭━❰ 📚 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴛᴜᴛᴏʀɪᴀʟ ᴠɪᴅᴇᴏ 🎥 ❱━⊱
-┃        <a href='https://t.me/Prime_Movie_Watch_Dawnload/75'>📥 𝗪𝗔𝗧𝗖𝗛 𝗧𝗨𝗧𝗢𝗥𝗜𝗔𝗟 𝗡𝗢𝗪 ▶️</a>
+╭━❰📚 ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴛᴜᴛᴏʀɪᴀʟ ᴠɪᴅᴇᴏ❱━⊱
+┃       <a href='https://t.me/Prime_Movie_Watch_Dawnload/75'>📥 𝗪𝗔𝗧𝗖𝗛 𝗧𝗨𝗧𝗢𝗥𝗜𝗔𝗟 𝗡𝗢𝗪 ▶️</a>
 ╰━━━━━━━━━━━━━━━━⊱
 💬 ᴊᴏɪɴ ᴏᴜʀ ᴀʟʟ ᴄʜᴀɴɴᴇʟ & ɢʀᴏᴜᴘꜱ  
 🔗✇ https://t.me/addlist/ceobDOjc7202ZmVl
 
 ⊰•─•─✦✗✦─•◈•─✦✗✦─•─•⊱
 📡 ᴏғғɪᴄɪᴀʟ ʙᴀᴄᴋᴜᴘ ᴄʜᴀɴɴᴇʟ 🔹  
-🔗 <a href="https://t.me/PrimeCineZone">Pʀɪᴍᴇ CɪɴᴇZᴏɴᴇ (ᴏꜰꜰɪᴄɪᴀʟ)</a>
+🔗 <a href="https://t.me/PrimeCineZone">@PʀɪᴍᴇCɪɴᴇZᴏɴᴇ (ᴏꜰꜰɪᴄɪᴀʟ)</a>
 ⊰━━━━━━━━━━━━━━━━━━━⊱
 🔔 ꜱᴛᴀʏ ᴛᴜɴᴇᴅ ꜰᴏʀ ᴍᴏʀᴇ ᴜᴘᴅᴀᴛᴇꜱ  
 📽️ ɴᴇᴡ ᴍᴏᴠɪᴇꜱ, ꜱᴇʀɪᴇꜱ & ᴍᴏʀᴇ ᴇᴠᴇʀʏ ᴅᴀʏ!  
@@ -238,10 +238,18 @@ def generate_unique_id(movie_name):
     return hashlib.md5(movie_name.encode('utf-8')).hexdigest()[:5]
 
 async def get_qualities(text):
-    qualities = ["ORG", "org", "hdcam", "HDCAM", "HQ", "hq", "HDRip", "hdrip", 
-                 "camrip", "WEB-DL", "CAMRip", "hdtc", "predvd", "DVDscr", "dvdscr", 
-                 "dvdrip", "HDTC", "dvdscreen", "HDTS", "hdts"]
-    return ", ".join([q for q in qualities if q.lower() in text.lower()])
+    quality_list = [
+        "ORG", "HDCAM", "CAMRip", "WEB-DL", "HDRip", "HDTC", "HDTS", "HQ", 
+        "hdtc", "hdcam", "camrip", "hdrip", "web-dl", "hdts", "hq",
+        "predvd", "DVDscr", "dvdscr", "dvdrip", "dvdscreen", "org"
+    ]
+    
+    text_lower = text.lower()
+    for quality in quality_list:
+        if quality.lower() in text_lower:
+            # Return the original-cased version from the list
+            return quality
+    return None
 
 
 async def movie_name_format(file_name):
