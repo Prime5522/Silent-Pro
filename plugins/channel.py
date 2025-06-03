@@ -122,12 +122,15 @@ async def send_movie_update(bot, file_name, caption):
         ]]
 
         image_url = poster or "https://te.legra.ph/file/88d845b4f8a024a71465d.jpg"
+        
         msg = await bot.send_photo(
                 chat_id=MOVIE_UPDATE_CHANNEL,
                 photo=image_url,
                 caption=full_caption,
                 reply_markup=InlineKeyboardMarkup(buttons)
         )
+
+        msg_id = getattr(msg, 'message_id', None) or getattr(msg, 'id', None)
 
         info_text = (
                 "╭━━━❰ 🎬 ꜰᴏʀ ʏᴏᴜʀ ᴇɴᴛᴇʀᴛᴀɪɴᴍᴇɴᴛ 🎭 ❱━⊱\n"
@@ -140,7 +143,7 @@ async def send_movie_update(bot, file_name, caption):
         await bot.send_message(
                 chat_id=MOVIE_UPDATE_CHANNEL,
                 text=info_text,
-                reply_to_message_id=msg.message_id
+                reply_to_message_id=msg_id
         )
     except Exception as e:
         print(f"Error in send_movie_update: {e}")
