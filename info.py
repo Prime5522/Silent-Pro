@@ -26,8 +26,8 @@ PICS = (environ.get('PICS', 'https://i.ibb.co/yFVbMwxh/photo-2025-03-07-23-34-35
 NOR_IMG = environ.get("NOR_IMG", "https://graph.org/file/62efbcc4e7580b76530ba.jpg")
 MELCOW_VID = environ.get("MELCOW_VID", "https://graph.org/file/e215d12bfd4fa2155e90e.mp4")
 SPELL_IMG = environ.get("SPELL_IMG", "https://graph.org/file/13702ae26fb05df52667c.jpg")
-SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://i.ibb.co/kssv1RSC/photo-2025-04-07-15-18-24-7493002345488318480.jpg'))
-FSUB_IMG = (environ.get('FSUB_IMG', 'https://i.ibb.co/cShkPjcZ/x.jpg')).split() 
+SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://i.postimg.cc/7Lq7R0vm/In-Shot-20250603-062230080.jpg'))
+FSUB_IMG = (environ.get('FSUB_IMG', 'https://i.postimg.cc/ncGVRngZ/IMG-20250603-160909-522.jpg')).split() 
 
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5926160191').split()]  #Admin Id
 CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002110875043').split()] #Movie Database Channel Id
