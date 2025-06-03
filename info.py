@@ -56,8 +56,8 @@ OWNER_BOTZ = environ.get('OWNER_BOTZ', 'https://t.me/Prime_Admin_Support_ProBot'
 OWNER_SUPP = environ.get('OWNER_SUPP', 'https://t.me/Prime_Botz_Support')
 
 #Force Subscription Channel (Put Same Channel Id In Both Veriables)
-AUTH_CHANNEL = int(environ.get('AUTH_CHANNEL', '')) 
-AUTH_REQ_CHANNEL = int(environ.get('AUTH_REQ_CHANNEL', ''))
+AUTH_CHANNEL = int(environ.get('AUTH_CHANNEL', '0')) 
+AUTH_REQ_CHANNEL = int(environ.get('AUTH_REQ_CHANNEL', '0'))
 
 IS_VERIFY = is_enabled('IS_VERIFY', False)
 LOG_VR_CHANNEL = int(environ.get('LOG_VR_CHANNEL', '-1002184630716')) #Verification Channel Id 
